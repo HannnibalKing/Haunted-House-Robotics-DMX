@@ -820,6 +820,120 @@
       }
 
       .diagnostic-panel-advanced {
+        background: var(--panel);
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+      }
+
+      /* Hardware & Tech Stack Panel */
+      .tech-stack-panel {
+        background: var(--panel);
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+        grid-column: span 2;
+      }
+
+      .hardware-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .hardware-item {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .hardware-item:hover {
+        background: rgba(0, 0, 0, 0.4);
+        border-color: var(--accent-2);
+      }
+
+      .hw-icon {
+        font-size: 2rem;
+        width: 50px;
+        text-align: center;
+      }
+
+      .hw-details {
+        flex: 1;
+      }
+
+      .hw-name {
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 4px;
+        font-size: 0.9rem;
+      }
+
+      .hw-spec {
+        color: var(--muted);
+        font-size: 0.8rem;
+        margin-bottom: 6px;
+      }
+
+      .hw-status {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 8px;
+        text-transform: uppercase;
+        display: inline-block;
+      }
+
+      .hw-status.online {
+        background: rgba(76, 175, 80, 0.2);
+        color: #4CAF50;
+        border: 1px solid rgba(76, 175, 80, 0.3);
+      }
+
+      .hw-status.warning {
+        background: rgba(255, 152, 0, 0.2);
+        color: #FF9800;
+        border: 1px solid rgba(255, 152, 0, 0.3);
+      }
+
+      .hw-status.offline {
+        background: rgba(244, 67, 54, 0.2);
+        color: #F44336;
+        border: 1px solid rgba(244, 67, 54, 0.3);
+      }
+
+      .trigger-btn {
+        background: linear-gradient(135deg, #ff9800, #f57c00);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 8px;
+      }
+
+      .trigger-btn:hover {
+        background: linear-gradient(135deg, #f57c00, #e65100);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+      }
+
+      .diagnostic-panel-advanced {
         grid-column: 1 / -1;
         background: rgba(0, 0, 0, 0.6);
         border: 2px solid rgba(255, 95, 95, 0.3);
@@ -1555,13 +1669,69 @@
             </div>
           </div>
           
+          <!-- Hardware & Tech Stack Panel -->
+          <div class="tech-stack-panel">
+            <h3>🖥️ Control Center Hardware</h3>
+            <div class="hardware-grid">
+              <div class="hardware-item">
+                <div class="hw-icon">🖥️</div>
+                <div class="hw-details">
+                  <div class="hw-name">Primary Controller</div>
+                  <div class="hw-spec">Raspberry Pi 4B (8GB RAM)</div>
+                  <div class="hw-status online">ONLINE</div>
+                </div>
+              </div>
+              <div class="hardware-item">
+                <div class="hw-icon">🔌</div>
+                <div class="hw-details">
+                  <div class="hw-name">Arduino Network</div>
+                  <div class="hw-spec">8x Arduino Mega 2560 + Ethernet</div>
+                  <div class="hw-status online">ALL CONNECTED</div>
+                </div>
+              </div>
+              <div class="hardware-item">
+                <div class="hw-icon">📡</div>
+                <div class="hw-details">
+                  <div class="hw-name">MQTT Broker</div>
+                  <div class="hw-spec">Eclipse Mosquitto v2.0.15</div>
+                  <div class="hw-status online">ACTIVE</div>
+                </div>
+              </div>
+              <div class="hardware-item">
+                <div class="hw-icon">🎚️</div>
+                <div class="hw-details">
+                  <div class="hw-name">DMX Controller</div>
+                  <div class="hw-spec">Enttec DMX USB Pro Mk2</div>
+                  <div class="hw-status online">512 CHANNELS</div>
+                </div>
+              </div>
+              <div class="hardware-item">
+                <div class="hw-icon">📹</div>
+                <div class="hw-details">
+                  <div class="hw-name">IP Camera Array</div>
+                  <div class="hw-spec">6x Hikvision DS-2CD2385 (8MP)</div>
+                  <div class="hw-status warning">1 OFFLINE</div>
+                </div>
+              </div>
+              <div class="hardware-item">
+                <div class="hw-icon">🔊</div>
+                <div class="hw-details">
+                  <div class="hw-name">Audio System</div>
+                  <div class="hw-spec">Behringer X32 Digital Mixer</div>
+                  <div class="hw-status online">32 CHANNELS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Enhanced Diagnostic Panel -->
           <div class="diagnostic-panel-advanced">
-            <h3>🔧 System Diagnostics</h3>
+            <h3>🔧 System Diagnostics & Control</h3>
             <div class="controls">
               <button class="run-btn" onclick="runControlRoom()">🚨 Run Deep Scan</button>
-              <button class="stop-btn" onclick="stopControlRoom()">⏹️ Abort</button>
-              <button class="reset-btn" onclick="resetSystems()">🔄 Reset All</button>
+              <button class="trigger-btn" onclick="triggerFaults()">⚠️ Trigger Faults</button>
+              <button class="reset-btn" onclick="resetAllSystems()">🔄 Reset All</button>
+              <button class="stop-btn" onclick="stopControlRoom()">⏹️ Emergency Abort</button>
             </div>
             <div class="terminal-advanced" id="control-terminal">
               <div class="terminal-header">
@@ -2168,6 +2338,94 @@
         }, 500);
       }
 
+      function resetAllSystems() {
+        // Enhanced reset function with more detailed feedback
+        const output = document.getElementById('control-output');
+        
+        // Stop all running demos and control room
+        if (activeDemo) stopDemo(activeDemo);
+        if (controlRoomActive) stopControlRoom();
+        
+        // Show reset sequence
+        output.innerHTML = '<div class="log-entry log-info">🔄 INITIATING COMPLETE SYSTEM RESET...</div>';
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-success">✅ All active demos terminated</div>';
+        }, 800);
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-success">✅ Fault states cleared</div>';
+        }, 1600);
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-success">✅ Scheduled maintenance reset</div>';
+        }, 2400);
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-success">✅ Hardware connections verified</div>';
+        }, 3200);
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-success">🎯 SYSTEM RESET COMPLETE - All systems operational</div>';
+        }, 4000);
+        
+        // Reset all terminals
+        setTimeout(() => {
+          const terminals = ['skeleton-output', 'ghost-output', 'effects-output', 'combat-output'];
+          terminals.forEach(id => {
+            const output = document.getElementById(id);
+            if (output) {
+              output.innerHTML = 'Ready. Press START to begin...';
+            }
+          });
+          
+          // Reset room statuses to all operational
+          document.getElementById('room1').className = 'room-status room-ok';
+          document.getElementById('room2').className = 'room-status room-ok';
+          document.getElementById('room3').className = 'room-status room-ok';
+          document.getElementById('room3').querySelector('.room-info').textContent = 'System: OPERATIONAL';
+          document.getElementById('room3').querySelector('.status-light').className = 'status-light green';
+          document.getElementById('room4').className = 'room-status room-ok';
+          document.getElementById('room4').querySelector('.room-info').textContent = 'System: OPERATIONAL';
+          document.getElementById('room4').querySelector('.status-light').className = 'status-light green';
+        }, 4500);
+      }
+
+      function triggerFaults() {
+        // Function to trigger system faults for testing purposes
+        const output = document.getElementById('control-output');
+        
+        output.innerHTML = '<div class="log-entry log-warning">⚠️ TRIGGERING DIAGNOSTIC FAULTS FOR TESTING...</div>';
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-error">🚨 FAULT: Room 3 - Servo overheating detected</div>';
+          document.getElementById('room3').className = 'room-status room-error';
+          document.getElementById('room3').querySelector('.room-info').textContent = 'SERVO FAULT - OVERHEATING';
+          document.getElementById('room3').querySelector('.status-light').className = 'status-light red';
+        }, 1000);
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-warning">⚠️ MAINTENANCE: Room 4 - Scheduled calibration required</div>';
+          document.getElementById('room4').className = 'room-status room-maintenance';
+          document.getElementById('room4').querySelector('.room-info').textContent = 'Calibration Required';
+          document.getElementById('room4').querySelector('.status-light').className = 'status-light yellow';
+        }, 2000);
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-error">🚨 NETWORK: Camera 2 connection lost</div>';
+          const monitor2 = document.getElementById('monitor2');
+          monitor2.className = 'monitor monitor-failed';
+        }, 3000);
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-warning">⚠️ POWER: Room 3 voltage drop to 10.2V - backup systems active</div>';
+        }, 4000);
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-info">🎯 FAULT INJECTION COMPLETE - Use RESET ALL to clear faults</div>';
+        }, 5000);
+      }
+
       function viewEscapeRoomScript() {
         const scriptPanel = document.getElementById('scriptPanel');
         if (scriptPanel.style.display === 'none') {
@@ -2178,13 +2436,68 @@
       }
 
       function downloadEscapeRoomCode() {
-        // Create a link to download the escape room code
-        const link = document.createElement('a');
-        link.href = 'https://raw.githubusercontent.com/HannnibalKing/Haunted-House-Robotics-DMX/main/combat_escape_room/escape_room_controller.js';
-        link.download = 'combat_escape_room_controller.js';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Enhanced download function with user feedback
+        const combatOutput = document.getElementById('combat-output');
+        
+        // Show download initiation message
+        if (combatOutput) {
+          combatOutput.innerHTML += '<div class="log-entry log-info">📥 Initiating Combat Escape Room Controller download...</div>';
+          
+          setTimeout(() => {
+            combatOutput.innerHTML += '<div class="log-entry log-success">✅ Production-ready Node.js controller with:</div>';
+            combatOutput.innerHTML += '<div class="log-entry log-info">   • 4-room tactical simulation system</div>';
+            combatOutput.innerHTML += '<div class="log-entry log-info">   • Real-time WebSocket/MQTT integration</div>';
+            combatOutput.innerHTML += '<div class="log-entry log-info">   • IoT device control (lights, sound, smoke)</div>';
+            combatOutput.innerHTML += '<div class="log-entry log-info">   • Mission scoring & analytics</div>';
+            combatOutput.innerHTML += '<div class="log-entry log-info">   • Complete package.json & README included</div>';
+          }, 500);
+        }
+        
+        // Create multiple download links for complete package
+        setTimeout(() => {
+          // Main controller file
+          const controllerLink = document.createElement('a');
+          controllerLink.href = 'https://raw.githubusercontent.com/HannnibalKing/Haunted-House-Robotics-DMX/main/combat_escape_room/escape_room_controller.js';
+          controllerLink.download = 'escape_room_controller.js';
+          document.body.appendChild(controllerLink);
+          controllerLink.click();
+          document.body.removeChild(controllerLink);
+          
+          // Package.json
+          setTimeout(() => {
+            const packageLink = document.createElement('a');
+            packageLink.href = 'https://raw.githubusercontent.com/HannnibalKing/Haunted-House-Robotics-DMX/main/combat_escape_room/package.json';
+            packageLink.download = 'package.json';
+            document.body.appendChild(packageLink);
+            packageLink.click();
+            document.body.removeChild(packageLink);
+          }, 200);
+          
+          // README with setup instructions
+          setTimeout(() => {
+            const readmeLink = document.createElement('a');
+            readmeLink.href = 'https://raw.githubusercontent.com/HannnibalKing/Haunted-House-Robotics-DMX/main/combat_escape_room/README.md';
+            readmeLink.download = 'README.md';
+            document.body.appendChild(readmeLink);
+            readmeLink.click();
+            document.body.removeChild(readmeLink);
+          }, 400);
+          
+          // Environment template
+          setTimeout(() => {
+            const envLink = document.createElement('a');
+            envLink.href = 'https://raw.githubusercontent.com/HannnibalKing/Haunted-House-Robotics-DMX/main/combat_escape_room/.env.example';
+            envLink.download = '.env.example';
+            document.body.appendChild(envLink);
+            envLink.click();
+            document.body.removeChild(envLink);
+            
+            if (combatOutput) {
+              combatOutput.innerHTML += '<div class="log-entry log-success">🎯 Complete Combat Escape Room package downloaded!</div>';
+              combatOutput.innerHTML += '<div class="log-entry log-info">📋 Next: Run "npm install" then "npm start" to deploy</div>';
+            }
+          }, 600);
+        }, 1000);
       }
 
       function viewGitHubRepo() {
