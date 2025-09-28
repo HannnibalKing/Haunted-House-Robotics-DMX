@@ -1,0 +1,1 @@
+Place your custom icon.png (1024x1024) and splash.png (2048x2048) images in this folder before building the Expo project.

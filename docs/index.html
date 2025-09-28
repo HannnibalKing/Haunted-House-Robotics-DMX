@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Haunted House Robotics Showcase</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #08080b;
+        --panel: rgba(20, 20, 32, 0.85);
+        --accent: #ff5f5f;
+        --accent-2: #7c5cff;
+        --text: #f4f6ff;
+        --muted: #9ba1bf;
+        --border: rgba(255, 255, 255, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        background: radial-gradient(circle at 20% 20%, rgba(124, 92, 255, 0.1), transparent 60%),
+          radial-gradient(circle at 80% 0%, rgba(255, 95, 95, 0.15), transparent 55%), var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      header {
+        padding: 80px 20px 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::after {
+        content: "";
+        position: absolute;
+        inset: -120px;
+        background: radial-gradient(circle, rgba(255, 95, 95, 0.08), transparent 60%);
+        filter: blur(80px);
+        z-index: -1;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 3.75rem);
+        margin-bottom: 16px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+        margin-bottom: 10px;
+      }
+
+      p.lead {
+        max-width: 720px;
+        margin: 0 auto 28px;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+
+      .cta {
+        display: inline-flex;
+        gap: 12px;
+      }
+
+      .cta a {
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--text);
+        border: 1px solid transparent;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta a.primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        box-shadow: 0 12px 30px rgba(124, 92, 255, 0.25);
+      }
+
+      .cta a.secondary {
+        border-color: var(--border);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .cta a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 32px rgba(124, 92, 255, 0.32);
+      }
+
+      main {
+        padding: 0 20px 80px;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+
+      section {
+        margin-top: 64px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: clamp(24px, 4vw, 40px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+
+      section + section {
+        margin-top: 48px;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 999px;
+        background: rgba(255, 95, 95, 0.12);
+        color: var(--accent);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 18px;
+      }
+
+      ul.features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+        margin: 24px 0 0;
+      }
+
+      ul.features li {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 18px;
+      }
+
+      .stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      pre {
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 14px 16px;
+        overflow-x: auto;
+        font-family: "Fira Code", "Cascadia Code", monospace;
+        font-size: 0.95rem;
+        color: #f4f4ff;
+      }
+
+      code.inline {
+        background: rgba(255, 255, 255, 0.08);
+        padding: 3px 6px;
+        border-radius: 6px;
+        font-family: inherit;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        margin-top: 24px;
+      }
+
+      .project-card {
+        background: rgba(255, 255, 255, 0.01);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 20px;
+      }
+
+      .project-card h3 {
+        margin-top: 0;
+        font-size: 1.4rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 60px 20px 40px;
+        color: var(--muted);
+      }
+
+      footer a {
+        color: var(--text);
+        text-decoration: none;
+        border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
+      }
+
+      @media (max-width: 640px) {
+        .cta {
+          flex-direction: column;
+        }
+        section {
+          padding: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Haunted House Robotics</h1>
+      <p class="lead">
+        A trio of Halloween-ready automation demos showcasing servo animatronics, motion FX, and an
+        AI-enhanced guest experience app. Built with Arduino, DMX lighting, React Native, and a dash of theatrics.
+      </p>
+      <div class="cta">
+        <a class="primary" href="https://github.com/HannnibalKing/Haunted-House-Robotics-DMX" target="_blank" rel="noopener">View Repository</a>
+        <a class="secondary" href="#terminal">Run Terminal Demo</a>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <span class="badge">The Lineup</span>
+        <h2>Three Projects, All Thrills</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <h3>Animated Skeleton</h3>
+            <p>
+              Four-servo animatronic paired with DMX lighting. Motion detection snaps the skeleton toward guests,
+              while the jaw syncs to audio for living-dead banter.
+            </p>
+            <ul class="features">
+              <li>Arduino Uno + MAX485 DMX Shield</li>
+              <li>Motion-triggered show cues</li>
+              <li>Modular C++ control library</li>
+              <li>ASCII wiring schematic</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <h3>Motion-Activated Ghost</h3>
+            <p>
+              A carriage-mounted ghost swoops down a hallway with WS2812 strobes, fog blasts, and a PIR-triggered
+              stepper choreography.
+            </p>
+            <ul class="features">
+              <li>AccelStepper + NeoPixel effects</li>
+              <li>DMX integration for venue control</li>
+              <li>Configurable travel distance</li>
+              <li>Fog relay sequencing</li>
+            </ul>
+          </div>
+          <div class="project-card">
+            <h3>Scare Experience App</h3>
+            <p>
+              Cross-platform Expo app for gathering per-room ratings, visualizing heatmaps, and generating AI floorplan drafts from crowd sentiment.
+            </p>
+            <ul class="features">
+              <li>React Native + Expo SDK 50</li>
+              <li>Jest-tested floorplan generator</li>
+              <li>Dark-theme UX for in-attraction use</li>
+              <li>Offline-friendly rating cache</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <span class="badge">Show Flow</span>
+        <h2>Quick Stats</h2>
+        <div class="stack">
+          <p><strong>Hardware:</strong> Servo + stepper control at 50Hz, DMX512 lighting cues, fog relay automation.</p>
+          <p><strong>Software:</strong> Arduino sketches, modular C++ libraries, Expo/React Native app with Context state.</p>
+          <p><strong>Skills Highlighted:</strong> embedded motion control, lighting design, UX for live events, AI-assisted layout ideation.</p>
+        </div>
+      </section>
+
+      <section id="terminal">
+        <span class="badge">Live Coding Demo</span>
+        <h2>Simulate the Haunt from the Terminal</h2>
+        <p>
+          The <code class="inline">console_demo.py</code> script replays the same cue codes used in the field. Perfect for interviews or quick GitHub previews.
+        </p>
+        <pre><code>cd simulations
+python console_demo.py skeleton --instant
+python console_demo.py ghost --speed 1.5
+python console_demo.py app --loop 2</code></pre>
+        <p>Each line logs timestamps, cues (e.g., <code class="inline">M29</code> head snap), and scene highlights so viewers can follow the choreography in real time.</p>
+      </section>
+
+      <section>
+        <span class="badge">Dive Deeper</span>
+        <h2>Documentation & Assets</h2>
+        <ul class="features">
+          <li><strong>Code:</strong> `/01_animated_skeleton/code` & `/02_motion_ghost/code` for Arduino sketches.</li>
+          <li><strong>Schematics:</strong> ASCII wiring diagrams in `/schematics`.</li>
+          <li><strong>Mobile App:</strong> Expo project in `/03_scare_experience_app/app` with Jest tests.</li>
+          <li><strong>Architecture Notes:</strong> Detailed breakdown in `/docs/scare_experience_architecture.md`.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 Haunted House Robotics — Crafted for immersive Halloween experiences.</p>
+      <p>
+        Need the full repo? <a href="https://github.com/HannnibalKing/Haunted-House-Robotics-DMX" target="_blank" rel="noopener">Fork it on GitHub</a>.
+      </p>
+    </footer>
+  </body>
+</html>
