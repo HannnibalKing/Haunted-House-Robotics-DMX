@@ -259,6 +259,7 @@
         font-size: 0.85rem;
         height: 200px;
         overflow-y: auto;
+        scroll-behavior: smooth;
       }
 
       .terminal-header {
@@ -274,27 +275,185 @@
         color: #e0e0e0;
         white-space: pre-wrap;
         font-family: inherit;
+        line-height: 1.4;
+        min-height: calc(100% - 40px);
+        display: flex;
+        flex-direction: column;
       }
 
       .log-entry {
-        margin-bottom: 4px;
+        margin-bottom: 6px;
+        padding: 2px 0;
+        animation: fadeIn 0.3s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       .log-timestamp {
         color: #666;
+        font-weight: 500;
       }
 
       .log-command {
         color: #00ff88;
         font-weight: 600;
+        text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
       }
 
       .log-warning {
         color: #ffaa00;
+        font-weight: 600;
+        text-shadow: 0 0 5px rgba(255, 170, 0, 0.4);
       }
 
       .log-error {
         color: #ff4444;
+        font-weight: 600;
+        text-shadow: 0 0 5px rgba(255, 68, 68, 0.4);
+      }
+
+      .log-success {
+        color: #44ff88;
+        font-weight: 600;
+      }
+
+      .log-data {
+        color: #88aaff;
+        font-family: monospace;
+      }
+
+      .progress-bar {
+        background: #333;
+        height: 4px;
+        border-radius: 2px;
+        margin: 4px 0;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        background: linear-gradient(90deg, #00ff88, #00cc66);
+        height: 100%;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      /* Control Room Styles */
+      .control-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-top: 24px;
+      }
+
+      .status-panel, .diagnostic-panel {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px;
+      }
+
+      .status-panel h3, .diagnostic-panel h3 {
+        margin: 0 0 20px 0;
+        font-size: 1.2rem;
+        color: var(--accent);
+      }
+
+      .room-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .room-status {
+        background: rgba(255, 255, 255, 0.02);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        padding: 16px;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .room-status.room-ok {
+        border-color: #00ff88;
+        box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
+      }
+
+      .room-status.room-error {
+        border-color: #ff4444;
+        box-shadow: 0 0 15px rgba(255, 68, 68, 0.2);
+        animation: pulse-error 2s infinite;
+      }
+
+      .room-status.room-maintenance {
+        border-color: #ffaa00;
+        box-shadow: 0 0 15px rgba(255, 170, 0, 0.15);
+      }
+
+      @keyframes pulse-error {
+        0%, 100% { box-shadow: 0 0 15px rgba(255, 68, 68, 0.2); }
+        50% { box-shadow: 0 0 25px rgba(255, 68, 68, 0.4); }
+      }
+
+      .room-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--accent);
+        line-height: 1;
+      }
+
+      .room-name {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+
+      .status-light {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        animation: blink 2s infinite;
+      }
+
+      .status-light.green {
+        background: #00ff88;
+        box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+      }
+
+      .status-light.red {
+        background: #ff4444;
+        box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+      }
+
+      .status-light.yellow {
+        background: #ffaa00;
+        box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0.3; }
+      }
+
+      .room-info {
+        font-size: 0.8rem;
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        .control-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .room-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -423,15 +582,54 @@
         </div>
       </section>
 
-      <section>
-        <span class="badge">Dive Deeper</span>
-        <h2>Documentation & Assets</h2>
-        <ul class="features">
-          <li><strong>Code:</strong> `/01_animated_skeleton/code` & `/02_motion_ghost/code` for Arduino sketches.</li>
-          <li><strong>Schematics:</strong> ASCII wiring diagrams in `/schematics`.</li>
-          <li><strong>Mobile App:</strong> Expo project in `/03_scare_experience_app/app` with Jest tests.</li>
-          <li><strong>Architecture Notes:</strong> Detailed breakdown in `/docs/scare_experience_architecture.md`.</li>
-        </ul>
+      <section id="control-room">
+        <span class="badge">Mission Control</span>
+        <h2>Haunted House Control Room</h2>
+        <p>Real-time monitoring and diagnostics for all robotics systems across the haunted attraction.</p>
+        
+        <div class="control-grid">
+          <div class="status-panel">
+            <h3>🏠 Room Status Overview</h3>
+            <div class="room-grid">
+              <div class="room-status room-ok" id="room1">
+                <div class="room-number">1</div>
+                <div class="room-name">Entrance Hall</div>
+                <div class="status-light green"></div>
+                <div class="room-info">Skeleton: OPERATIONAL</div>
+              </div>
+              <div class="room-status room-ok" id="room2">
+                <div class="room-number">2</div>
+                <div class="room-name">Ghost Corridor</div>
+                <div class="status-light green"></div>
+                <div class="room-info">Motion System: ACTIVE</div>
+              </div>
+              <div class="room-status room-error" id="room3">
+                <div class="room-number">3</div>
+                <div class="room-name">Chamber of Terror</div>
+                <div class="status-light red"></div>
+                <div class="room-info">Servo Malfunction Detected</div>
+              </div>
+              <div class="room-status room-maintenance" id="room4">
+                <div class="room-number">4</div>
+                <div class="room-name">Exit Portal</div>
+                <div class="status-light yellow"></div>
+                <div class="room-info">Scheduled Maintenance</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="diagnostic-panel">
+            <h3>🔧 System Diagnostics</h3>
+            <div class="controls">
+              <button class="run-btn" onclick="runControlRoom()">🚨 Run System Check</button>
+              <button class="stop-btn" onclick="stopControlRoom()">⏹️ Abort Diagnostics</button>
+            </div>
+            <div class="terminal" id="control-terminal">
+              <div class="terminal-header">HAUNTED_HOUSE_CONTROL v2.3.1</div>
+              <div class="terminal-content" id="control-output">Control room online. All systems monitoring... Click RUN SYSTEM CHECK to diagnose Room 3 malfunction.</div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -444,56 +642,74 @@
     <script>
       const demoScenarios = {
         skeleton: [
-          { time: 0, cmd: 'INIT', msg: 'Power on animatronic skeleton core' },
-          { time: 100, cmd: 'M05', msg: 'Set head servo to neutral' },
-          { time: 300, cmd: 'L12', msg: 'Fade DMX wash to ember red' },
-          { time: 800, cmd: 'S11', msg: 'Idle loop: finger twitch' },
-          { time: 1300, cmd: 'PIR', msg: 'Motion trip detected - VISITOR ENTERS', highlight: true },
-          { time: 1500, cmd: 'M29', msg: 'Snap head to visitor' },
-          { time: 1700, cmd: 'M33', msg: 'Raise both arms' },
-          { time: 2200, cmd: 'AUX', msg: 'Trigger jaw chatter synced to audio' },
-          { time: 2700, cmd: 'DMX', msg: 'Flash strobes + cold white backlight' },
-          { time: 3200, cmd: 'WAIT', msg: 'Hold pose' },
-          { time: 3700, cmd: 'RESET', msg: 'Arms down, lights to idle' }
+          { time: 0, cmd: 'INIT', msg: 'Power on animatronic skeleton core', data: 'Servos: 4/4 online | DMX: Ch 1-16 active', type: 'success' },
+          { time: 100, cmd: 'M05', msg: 'Set head servo to neutral', data: 'Position: 90° | Torque: 2.1kg-cm', progress: 25 },
+          { time: 300, cmd: 'L12', msg: 'Fade DMX wash to ember red', data: 'RGB: [255,85,0] | Brightness: 35%', progress: 40 },
+          { time: 800, cmd: 'S11', msg: 'Idle loop: finger twitch', data: 'Micro movements: ±3° | Freq: 0.2Hz', progress: 55 },
+          { time: 1300, cmd: 'PIR', msg: 'Motion trip detected - VISITOR ENTERS', data: 'Distance: 1.2m | Confidence: 94%', highlight: true, type: 'warning', progress: 70 },
+          { time: 1500, cmd: 'M29', msg: 'Snap head to visitor', data: 'Target angle: 135° | Speed: 180°/s', progress: 80 },
+          { time: 1700, cmd: 'M33', msg: 'Raise both arms', data: 'L-arm: 45° | R-arm: 50° | Sync delta: 0.1s', progress: 85 },
+          { time: 2200, cmd: 'AUX', msg: 'Trigger jaw chatter synced to audio', data: 'Audio file: skeleton_laugh.wav | Duration: 2.3s', progress: 90 },
+          { time: 2700, cmd: 'DMX', msg: 'Flash strobes + cold white backlight', data: 'Strobe: 15Hz | Backlight: 100% | Effect: pulse', progress: 95 },
+          { time: 3200, cmd: 'WAIT', msg: 'Hold pose', data: 'Servo lock engaged | Power: 85% | Hold time: 0.5s', progress: 98 },
+          { time: 3700, cmd: 'RESET', msg: 'Arms down, lights to idle', data: 'Return to home positions | Fade time: 1.0s', type: 'success', progress: 100 }
         ],
         ghost: [
-          { time: 0, cmd: 'INIT', msg: 'Pre-charge carriage and test limit switches' },
-          { time: 200, cmd: 'L21', msg: 'Set LED strip to cyan breathing' },
-          { time: 400, cmd: 'PIR', msg: 'Motion detect at hallway - GUEST APPROACH', highlight: true },
-          { time: 600, cmd: 'M14', msg: 'Carriage glide forward 1.2m' },
-          { time: 1200, cmd: 'FX1', msg: 'Fog blast + shriek sample' },
-          { time: 1600, cmd: 'L99', msg: 'Strobe white / amber alternation' },
-          { time: 2100, cmd: 'WAIT', msg: 'Hover at guest' },
-          { time: 2600, cmd: 'M02', msg: 'Retreat carriage to home' },
-          { time: 3200, cmd: 'RESET', msg: 'Resume cyan breathing + cooldown' }
+          { time: 0, cmd: 'INIT', msg: 'Pre-charge carriage and test limit switches', data: 'Stepper: 200 steps/rev | Accel: 400 steps/s²', type: 'success', progress: 10 },
+          { time: 200, cmd: 'L21', msg: 'Set LED strip to cyan breathing', data: 'WS2812: 60 LEDs | Pattern: sine wave | Period: 3s', progress: 20 },
+          { time: 400, cmd: 'PIR', msg: 'Motion detect at hallway - GUEST APPROACH', data: 'Sensor range: 5m | Heat signature detected', highlight: true, type: 'warning', progress: 40 },
+          { time: 600, cmd: 'M14', msg: 'Carriage glide forward 1.2m', data: 'Speed: 800 steps/s | Distance: 1200mm | ETA: 1.5s', progress: 60 },
+          { time: 1200, cmd: 'FX1', msg: 'Fog blast + shriek sample', data: 'Fog duration: 2s | Audio: ghost_shriek.wav | Volume: 85%', progress: 75 },
+          { time: 1600, cmd: 'L99', msg: 'Strobe white / amber alternation', data: 'Frequency: 8Hz | Colors: #FFFFFF/#FFAA00 | Intensity: max', progress: 85 },
+          { time: 2100, cmd: 'WAIT', msg: 'Hover at guest', data: 'Position hold | Servo brake: ON | Duration: 0.5s', progress: 90 },
+          { time: 2600, cmd: 'M02', msg: 'Retreat carriage to home', data: 'Return speed: 1200 steps/s | Home switch active', progress: 95 },
+          { time: 3200, cmd: 'RESET', msg: 'Resume cyan breathing + cooldown', data: 'Cooldown: 10s | Ready for next trigger', type: 'success', progress: 100 }
         ],
         effects: [
-          { time: 0, cmd: 'INIT', msg: 'DMX universe online - 512 channels active' },
-          { time: 200, cmd: 'FOG1', msg: 'Fog machine 1 heating (30s warm-up)' },
-          { time: 400, cmd: 'FOG2', msg: 'Fog machine 2 heating (30s warm-up)' },
-          { time: 800, cmd: 'L001', msg: 'Par lights 1-4 fade to deep red' },
-          { time: 1200, cmd: 'TRIG', msg: 'Pressure plate activated - GUEST DETECTED', highlight: true },
-          { time: 1400, cmd: 'FIRE', msg: 'Fog blast + flame projector ignition' },
-          { time: 1600, cmd: 'L255', msg: 'Strobe array full intensity' },
-          { time: 2000, cmd: 'SND1', msg: 'Thunder crack + explosion sample' },
-          { time: 2400, cmd: 'FADE', msg: 'All effects fade to ambient' }
+          { time: 0, cmd: 'INIT', msg: 'DMX universe online - 512 channels active', data: 'Protocol: DMX-512 | Baud: 250kbps | Fixtures: 8 online', type: 'success', progress: 15 },
+          { time: 200, cmd: 'FOG1', msg: 'Fog machine 1 heating (30s warm-up)', data: 'Temp: 24°C → 180°C | Fluid level: 85% | Power: 1200W', progress: 25 },
+          { time: 400, cmd: 'FOG2', msg: 'Fog machine 2 heating (30s warm-up)', data: 'Temp: 26°C → 180°C | Fluid level: 92% | Power: 1200W', progress: 35 },
+          { time: 800, cmd: 'L001', msg: 'Par lights 1-4 fade to deep red', data: 'DMX Ch 1-12: RGB[180,0,0] | Fade time: 2s | Dimmer: 75%', progress: 50 },
+          { time: 1200, cmd: 'TRIG', msg: 'Pressure plate activated - GUEST DETECTED', data: 'Weight: 68kg | Plate area: 0.5m² | Trigger threshold exceeded', highlight: true, type: 'warning', progress: 70 },
+          { time: 1400, cmd: 'FIRE', msg: 'Fog blast + flame projector ignition', data: 'Fog output: max | Flame height: 2.1m | Safety interlock: OK', type: 'warning', progress: 85 },
+          { time: 1600, cmd: 'L255', msg: 'Strobe array full intensity', data: 'Xenon strobes: 6 units | Flash rate: 12Hz | Power: 3600W total', progress: 90 },
+          { time: 2000, cmd: 'SND1', msg: 'Thunder crack + explosion sample', data: 'Audio file: thunder_explosion.wav | SPL: 110dB | Duration: 3.2s', progress: 95 },
+          { time: 2400, cmd: 'FADE', msg: 'All effects fade to ambient', data: 'Fade time: 3s | Ambient level: 15% | Fog dissipate: 30s', type: 'success', progress: 100 }
         ],
         combat: [
-          { time: 0, cmd: 'BOOT', msg: '[CLASSIFIED] Tactical simulation initializing...' },
-          { time: 500, cmd: 'SITR', msg: 'SITUATION: Insurgent compound, 4 rooms, 6 hostiles' },
-          { time: 1000, cmd: 'R001', msg: 'ENTRY POINT: Breached wall, smoke grenades deployed' },
-          { time: 1500, cmd: 'CONT', msg: 'Contact front! AK-47 muzzle flash detected', highlight: true },
-          { time: 2000, cmd: 'MORTAR', msg: 'Incoming 82mm mortar - TAKE COVER!' },
-          { time: 2200, cmd: 'EXPL', msg: 'Explosion 15m northeast - debris shower active' },
-          { time: 2800, cmd: 'R002', msg: 'Room 2 cleared - IED discovered under stairwell' },
-          { time: 3400, cmd: 'SNIPER', msg: 'Sniper fire from compound roof - suppressing' },
-          { time: 4000, cmd: 'R003', msg: 'Interrogation room - intel documents secured' },
-          { time: 4600, cmd: 'EVAC', msg: 'Extraction point reached - mission complete' }
+          { time: 0, cmd: 'BOOT', msg: '[CLASSIFIED] Tactical simulation initializing...', data: 'Scenario: Urban CQB | Hostiles: 6 | Civilians: 2 | Intel: HIGH', type: 'warning', progress: 5 },
+          { time: 500, cmd: 'SITR', msg: 'SITUATION: Insurgent compound, 4 rooms, 6 hostiles', data: 'Threat level: SEVERE | Rules of engagement: WEAPONS FREE', progress: 15 },
+          { time: 1000, cmd: 'R001', msg: 'ENTRY POINT: Breached wall, smoke grenades deployed', data: 'Breach charge: 2kg C4 | Smoke duration: 45s | Visibility: <2m', progress: 30 },
+          { time: 1500, cmd: 'CONT', msg: 'Contact front! AK-47 muzzle flash detected', data: 'Weapon ID: AK-47 | Range: 15m | Suppressive fire initiated', highlight: true, type: 'error', progress: 50 },
+          { time: 2000, cmd: 'MORTAR', msg: 'Incoming 82mm mortar - TAKE COVER!', data: 'Impact ETA: 3.2s | Blast radius: 20m | DANGER CLOSE', type: 'error', progress: 60 },
+          { time: 2200, cmd: 'EXPL', msg: 'Explosion 15m northeast - debris shower active', data: 'Blast yield: ~2kg TNT | Debris field: 30m | Casualties: 0', type: 'warning', progress: 70 },
+          { time: 2800, cmd: 'R002', msg: 'Room 2 cleared - IED discovered under stairwell', data: 'Device type: Pressure plate IED | Payload: unknown | EOD requested', progress: 80 },
+          { time: 3400, cmd: 'SNIPER', msg: 'Sniper fire from compound roof - suppressing', data: 'Caliber: 7.62x54R | Range: 200m | Counter-sniper engaged', type: 'warning', progress: 85 },
+          { time: 4000, cmd: 'R003', msg: 'Interrogation room - intel documents secured', data: 'Documents: 15 pages | Language: Arabic | Classification: SECRET', progress: 95 },
+          { time: 4600, cmd: 'EVAC', msg: 'Extraction point reached - mission complete', data: 'Casualties: 0 KIA, 2 WIA | Intel recovered | Exfil: Black Hawk', type: 'success', progress: 100 }
         ]
       };
 
+      // Control Room Diagnostic Scenario
+      const controlRoomScenario = [
+        { time: 0, cmd: 'INIT', msg: 'Haunted House Control System initializing...', data: 'Version: 2.3.1 | Rooms: 4 | Network: 192.168.1.0/24', type: 'success', progress: 10 },
+        { time: 500, cmd: 'SCAN', msg: 'Scanning all room systems for anomalies', data: 'Rooms 1-4: Network ping | Hardware status | Sensor readings', progress: 25 },
+        { time: 1200, cmd: 'R001', msg: 'Room 1 - Entrance Hall: Systems nominal', data: 'Skeleton servo: 98% health | DMX: All channels OK | PIR: Active', type: 'success', progress: 40 },
+        { time: 1800, cmd: 'R002', msg: 'Room 2 - Ghost Corridor: All systems operational', data: 'Stepper motor: 94% health | LED strip: 60/60 pixels | Fog: 87% fluid', type: 'success', progress: 55 },
+        { time: 2400, cmd: 'R003', msg: 'Room 3 - Chamber of Terror: CRITICAL FAULT DETECTED', data: 'Main servo controller: TIMEOUT | Error code: 0x2A7F | Backup: OFFLINE', highlight: true, type: 'error', progress: 70 },
+        { time: 3000, cmd: 'DIAG', msg: 'Running deep diagnostics on Room 3 hardware', data: 'Power supply: 11.8V (LOW) | Temperature: 67°C (HIGH) | Load current: 4.2A', type: 'warning', progress: 75 },
+        { time: 3800, cmd: 'FIX1', msg: 'Attempting servo controller reset...', data: 'Reset sequence initiated | Waiting for boot response...', progress: 80 },
+        { time: 4500, cmd: 'FIX2', msg: 'Controller reset failed. Switching to backup unit', data: 'Backup controller: Activating | Servo calibration required', type: 'warning', progress: 85 },
+        { time: 5200, cmd: 'CAL', msg: 'Calibrating backup servo positions', data: 'Home position set | Range of motion: 0-180° | Torque limit: 3.0kg-cm', progress: 90 },
+        { time: 5800, cmd: 'TEST', msg: 'Testing Room 3 functionality with backup system', data: 'Movement test: PASS | Audio sync: PASS | Safety limits: PASS', progress: 95 },
+        { time: 6400, cmd: 'RESOLVED', msg: 'Room 3 operational on backup controller', data: 'Performance: 85% nominal | Recommend main controller replacement', type: 'success', progress: 100 },
+        { time: 7000, cmd: 'STATUS', msg: 'All rooms now operational. Control room monitoring active.', data: 'Total uptime: 99.2% | Next maintenance: 72 hours', type: 'success' }
+      ];
+
       let activeDemo = null;
       let demoTimeout = null;
+      let controlRoomActive = false;
+      let controlTimeout = null;
 
       function runDemo(type) {
         if (activeDemo) stopDemo(activeDemo);
@@ -510,15 +726,37 @@
           
           const step = scenario[stepIndex];
           const timestamp = (step.time / 1000).toFixed(2).padStart(6, ' ');
-          const highlight = step.highlight ? ' log-warning' : '';
           
-          output.innerHTML += `<div class="log-entry${highlight}">
+          // Determine CSS classes based on step properties
+          let cssClasses = 'log-entry';
+          if (step.highlight) cssClasses += ' log-warning';
+          if (step.type === 'success') cssClasses += ' log-success';
+          if (step.type === 'warning') cssClasses += ' log-warning';
+          if (step.type === 'error') cssClasses += ' log-error';
+          
+          // Build the log entry HTML
+          let logHtml = `<div class="${cssClasses}">
             <span class="log-timestamp">[${timestamp}s]</span> 
             <span class="log-command">${step.cmd.padEnd(8)}</span> 
-            ${step.msg}
-          </div>`;
+            ${step.msg}`;
           
+          // Add technical data if available
+          if (step.data) {
+            logHtml += `<br><span class="log-data">    └─ ${step.data}</span>`;
+          }
+          
+          // Add progress bar if available
+          if (step.progress !== undefined) {
+            logHtml += `<div class="progress-bar"><div class="progress-fill" style="width: ${step.progress}%"></div></div>`;
+          }
+          
+          logHtml += '</div>';
+          
+          output.innerHTML += logHtml;
+          
+          // Auto-scroll to bottom with smooth behavior
           output.scrollTop = output.scrollHeight;
+          
           stepIndex++;
           
           if (stepIndex < scenario.length) {
@@ -527,7 +765,7 @@
           } else {
             setTimeout(() => {
               if (activeDemo === type) {
-                output.innerHTML += '<div class="log-entry log-command">Sequence complete. Ready for next run...</div>';
+                output.innerHTML += '<div class="log-entry log-success">✓ Sequence complete. Ready for next run...</div>';
                 activeDemo = null;
               }
             }, 500);
@@ -542,7 +780,100 @@
           activeDemo = null;
           clearTimeout(demoTimeout);
           const output = document.getElementById(type + '-output');
-          output.innerHTML += '<div class="log-entry log-error">EMERGENCY STOP - All systems halted</div>';
+          output.innerHTML += '<div class="log-entry log-error">⚠️ EMERGENCY STOP - All systems halted</div>';
+          output.scrollTop = output.scrollHeight;
+        }
+      }
+
+      function runControlRoom() {
+        if (controlRoomActive) return;
+        controlRoomActive = true;
+        
+        const output = document.getElementById('control-output');
+        output.innerHTML = '';
+        
+        // Update room status during diagnostic
+        setTimeout(() => {
+          document.getElementById('room3').className = 'room-status room-error';
+          document.getElementById('room3').querySelector('.room-info').textContent = 'DIAGNOSING SERVO FAULT...';
+        }, 2400);
+        
+        setTimeout(() => {
+          document.getElementById('room3').className = 'room-status room-maintenance';
+          document.getElementById('room3').querySelector('.room-info').textContent = 'Backup Controller Active';
+          document.getElementById('room3').querySelector('.status-light').className = 'status-light yellow';
+        }, 5200);
+        
+        setTimeout(() => {
+          document.getElementById('room3').className = 'room-status room-ok';
+          document.getElementById('room3').querySelector('.room-info').textContent = 'Backup System: OPERATIONAL';
+          document.getElementById('room3').querySelector('.status-light').className = 'status-light green';
+        }, 6400);
+        
+        let stepIndex = 0;
+        
+        function runNextStep() {
+          if (stepIndex >= controlRoomScenario.length || !controlRoomActive) return;
+          
+          const step = controlRoomScenario[stepIndex];
+          const timestamp = (step.time / 1000).toFixed(2).padStart(6, ' ');
+          
+          let cssClasses = 'log-entry';
+          if (step.highlight) cssClasses += ' log-warning';
+          if (step.type === 'success') cssClasses += ' log-success';
+          if (step.type === 'warning') cssClasses += ' log-warning';
+          if (step.type === 'error') cssClasses += ' log-error';
+          
+          let logHtml = `<div class="${cssClasses}">
+            <span class="log-timestamp">[${timestamp}s]</span> 
+            <span class="log-command">${step.cmd.padEnd(8)}</span> 
+            ${step.msg}`;
+          
+          if (step.data) {
+            logHtml += `<br><span class="log-data">    └─ ${step.data}</span>`;
+          }
+          
+          if (step.progress !== undefined) {
+            logHtml += `<div class="progress-bar"><div class="progress-fill" style="width: ${step.progress}%"></div></div>`;
+          }
+          
+          logHtml += '</div>';
+          
+          output.innerHTML += logHtml;
+          output.scrollTop = output.scrollHeight;
+          
+          stepIndex++;
+          
+          if (stepIndex < controlRoomScenario.length) {
+            const nextDelay = controlRoomScenario[stepIndex].time - step.time;
+            controlTimeout = setTimeout(runNextStep, nextDelay);
+          } else {
+            setTimeout(() => {
+              if (controlRoomActive) {
+                output.innerHTML += '<div class="log-entry log-success">✓ Diagnostic complete. All systems monitored.</div>';
+                controlRoomActive = false;
+              }
+            }, 500);
+          }
+        }
+        
+        runNextStep();
+      }
+
+      function stopControlRoom() {
+        if (controlRoomActive) {
+          controlRoomActive = false;
+          clearTimeout(controlTimeout);
+          const output = document.getElementById('control-output');
+          output.innerHTML += '<div class="log-entry log-error">🛑 Diagnostic aborted - Control room standing by</div>';
+          output.scrollTop = output.scrollHeight;
+          
+          // Reset room statuses
+          setTimeout(() => {
+            document.getElementById('room3').className = 'room-status room-error';
+            document.getElementById('room3').querySelector('.room-info').textContent = 'Servo Malfunction Detected';
+            document.getElementById('room3').querySelector('.status-light').className = 'status-light red';
+          }, 1000);
         }
       }
     </script>
