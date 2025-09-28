@@ -214,6 +214,8 @@
         border: 1px solid var(--border);
         backdrop-filter: blur(20px);
         transition: transform 0.3s ease, border-color 0.3s ease;
+        overflow: hidden;
+        box-sizing: border-box;
       }
 
       .portfolio-panel:hover {
@@ -297,14 +299,18 @@
       .tech-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
+        gap: 15px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .tech-category {
         background: rgba(0, 0, 0, 0.2);
-        padding: 20px;
+        padding: 15px;
         border-radius: 8px;
         border: 1px solid var(--border);
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .tech-title {
@@ -338,11 +344,13 @@
 
       .project-item {
         background: rgba(0, 0, 0, 0.3);
-        padding: 25px;
+        padding: 20px;
         border-radius: 12px;
         border: 1px solid var(--border);
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         transition: all 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .project-item:hover {
@@ -381,17 +389,21 @@
 
       .project-tech {
         display: flex;
-        gap: 8px;
+        gap: 6px;
         flex-wrap: wrap;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .tech-tag {
         background: rgba(124, 92, 255, 0.2);
         color: var(--accent-2);
-        padding: 4px 10px;
-        border-radius: 16px;
-        font-size: 0.75rem;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 0.7rem;
         border: 1px solid rgba(124, 92, 255, 0.3);
+        white-space: nowrap;
+        flex-shrink: 0;
       }
 
       .service-category {
@@ -429,11 +441,13 @@
 
       .cta-section {
         background: linear-gradient(135deg, rgba(124, 92, 255, 0.1), rgba(255, 95, 95, 0.1));
-        padding: 30px;
+        padding: 25px;
         border-radius: 12px;
         border: 1px solid var(--border);
         text-align: center;
-        margin-top: 30px;
+        margin-top: 25px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .cta-section h4 {
