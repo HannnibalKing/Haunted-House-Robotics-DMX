@@ -183,6 +183,339 @@
         font-size: 1.4rem;
       }
 
+      /* Portfolio Section Styles */
+      .portfolio-section {
+        padding: 100px 20px;
+        background: linear-gradient(135deg, rgba(124, 92, 255, 0.05), rgba(255, 95, 95, 0.05));
+        position: relative;
+      }
+
+      .portfolio-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border), transparent);
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 40px;
+        margin-top: 60px;
+      }
+
+      .portfolio-panel {
+        background: var(--panel);
+        border-radius: 16px;
+        padding: 40px;
+        border: 1px solid var(--border);
+        backdrop-filter: blur(20px);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+      }
+
+      .portfolio-panel:hover {
+        transform: translateY(-8px);
+        border-color: var(--accent-2);
+      }
+
+      .portfolio-header {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .portfolio-header h3 {
+        font-size: 1.8rem;
+        margin: 0 0 8px 0;
+        color: var(--accent);
+      }
+
+      .portfolio-header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--accent-2);
+        margin: 8px 0 20px 0;
+      }
+
+      .contact-info {
+        margin-bottom: 30px;
+      }
+
+      .contact-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+      }
+
+      .contact-label {
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .contact-value {
+        color: var(--text);
+        text-align: right;
+      }
+
+      .contact-value a {
+        color: var(--accent-2);
+        text-decoration: none;
+      }
+
+      .contact-value a:hover {
+        text-decoration: underline;
+      }
+
+      .resume-section {
+        margin-bottom: 30px;
+      }
+
+      .resume-section h4 {
+        color: var(--accent);
+        font-size: 1.2rem;
+        margin: 0 0 15px 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 95, 95, 0.2);
+      }
+
+      .resume-section p {
+        color: var(--text);
+        line-height: 1.7;
+        margin: 0;
+      }
+
+      .tech-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .tech-category {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+      }
+
+      .tech-title {
+        display: block;
+        color: var(--accent-2);
+        font-weight: 600;
+        margin-bottom: 12px;
+        font-size: 0.9rem;
+      }
+
+      .tech-category ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tech-category li {
+        color: var(--text);
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+        padding-left: 12px;
+        position: relative;
+      }
+
+      .tech-category li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+
+      .project-item {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        margin-bottom: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .project-item:hover {
+        background: rgba(0, 0, 0, 0.4);
+        border-color: var(--accent-2);
+      }
+
+      .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .project-header h4 {
+        color: var(--accent);
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      .project-status {
+        background: var(--accent);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .project-item p {
+        color: var(--text);
+        line-height: 1.6;
+        margin: 0 0 15px 0;
+        font-size: 0.9rem;
+      }
+
+      .project-tech {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tech-tag {
+        background: rgba(124, 92, 255, 0.2);
+        color: var(--accent-2);
+        padding: 4px 10px;
+        border-radius: 16px;
+        font-size: 0.75rem;
+        border: 1px solid rgba(124, 92, 255, 0.3);
+      }
+
+      .service-category {
+        margin-bottom: 30px;
+      }
+
+      .service-category h4 {
+        color: var(--accent);
+        font-size: 1.1rem;
+        margin: 0 0 15px 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 95, 95, 0.2);
+      }
+
+      .service-category ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .service-category li {
+        color: var(--text);
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        padding-left: 16px;
+        position: relative;
+      }
+
+      .service-category li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        color: var(--accent-2);
+      }
+
+      .cta-section {
+        background: linear-gradient(135deg, rgba(124, 92, 255, 0.1), rgba(255, 95, 95, 0.1));
+        padding: 30px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .cta-section h4 {
+        color: var(--accent);
+        margin: 0 0 10px 0;
+        font-size: 1.2rem;
+      }
+
+      .cta-section p {
+        color: var(--text);
+        margin: 0 0 20px 0;
+        font-size: 0.95rem;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+      }
+
+      .cta-button {
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        border: 2px solid;
+      }
+
+      .cta-button.primary {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+
+      .cta-button.primary:hover {
+        background: transparent;
+        color: var(--accent);
+      }
+
+      .cta-button.secondary {
+        background: transparent;
+        color: var(--accent-2);
+        border-color: var(--accent-2);
+      }
+
+      .cta-button.secondary:hover {
+        background: var(--accent-2);
+        color: white;
+      }
+
+      @media (max-width: 1200px) {
+        .portfolio-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        
+        .portfolio-panel {
+          padding: 30px;
+        }
+        
+        .tech-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .cta-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .cta-button {
+          width: 200px;
+        }
+      }
+
       footer {
         text-align: center;
         padding: 60px 20px 40px;
@@ -745,6 +1078,81 @@
         .monitors-grid {
           grid-template-columns: 1fr;
         }
+        
+        .combat-layout {
+          flex-direction: column;
+        }
+      }
+
+      /* Combat Demo Enhanced Styles */
+      .combat-demo-extended {
+        grid-column: 1 / -1;
+      }
+
+      .combat-layout {
+        display: flex;
+        gap: 20px;
+        margin-top: 16px;
+      }
+
+      .combat-controls {
+        flex: 1;
+      }
+
+      .script-panel {
+        flex: 1;
+        background: rgba(0, 0, 0, 0.4);
+        border: 2px solid rgba(255, 170, 0, 0.3);
+        border-radius: 12px;
+        padding: 16px;
+        font-family: "Fira Code", monospace;
+        font-size: 0.85rem;
+      }
+
+      .script-panel h4 {
+        margin: 0 0 16px 0;
+        color: #ffaa00;
+        font-size: 1.1rem;
+      }
+
+      .script-panel h5 {
+        color: #00ff88;
+        margin: 12px 0 8px 0;
+      }
+
+      .room-sequence {
+        margin: 12px 0;
+      }
+
+      .room-item {
+        background: rgba(255, 255, 255, 0.05);
+        border-left: 3px solid #ff5f5f;
+        padding: 8px 12px;
+        margin: 6px 0;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .script-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        background: linear-gradient(135deg, #ffaa00, #cc8800);
+        color: #0a0a0a;
+      }
+
+      .script-btn:hover {
+        background: linear-gradient(135deg, #cc8800, #aa6600);
+        transform: translateY(-1px);
+      }
+
+      .script-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 16px;
       }
 
       .room-grid {
@@ -954,15 +1362,50 @@
             </div>
           </div>
 
-          <div class="demo-panel">
+          <div class="demo-panel combat-demo-extended">
             <h3>🔥 Combat Escape Room</h3>
-            <div class="controls">
-              <button class="run-btn" onclick="runDemo('combat')">▶️ Begin Mission</button>
-              <button class="stop-btn" onclick="stopDemo('combat')">⏹️ Abort Mission</button>
-            </div>
-            <div class="terminal" id="combat-terminal">
-              <div class="terminal-header">TACTICAL_SIM v4.0 [CLASSIFIED]</div>
-              <div class="terminal-content" id="combat-output">Insurgent camp simulation loaded. 4 rooms active. Awaiting infiltration...</div>
+            <div class="combat-layout">
+              <div class="combat-controls">
+                <div class="controls">
+                  <button class="run-btn" onclick="runDemo('combat')">▶️ Begin Mission</button>
+                  <button class="stop-btn" onclick="stopDemo('combat')">⏹️ Abort Mission</button>
+                  <button class="script-btn" onclick="viewEscapeRoomScript()">📋 View Script</button>
+                </div>
+                <div class="terminal" id="combat-terminal">
+                  <div class="terminal-header">TACTICAL_SIM v4.0 [CLASSIFIED]</div>
+                  <div class="terminal-content" id="combat-output">Insurgent camp simulation loaded. 4 rooms active. Awaiting infiltration...</div>
+                </div>
+              </div>
+              <div class="script-panel" id="scriptPanel" style="display: none;">
+                <h4>🎯 Combat Escape Room Script</h4>
+                <div class="script-content">
+                  <h5>Mission Briefing:</h5>
+                  <p><strong>Objective:</strong> Infiltrate insurgent compound, gather intelligence, neutralize threats</p>
+                  <p><strong>Intel:</strong> 4-room compound, 6 hostiles, 2 civilians, high-value documents</p>
+                  <p><strong>Equipment:</strong> M4A1, sidearm, breaching charges, smoke grenades</p>
+                  
+                  <h5>Room Sequence:</h5>
+                  <div class="room-sequence">
+                    <div class="room-item">
+                      <strong>Room 1 - Entry:</strong> Breach wall, deploy smoke, advance under cover
+                    </div>
+                    <div class="room-item">
+                      <strong>Room 2 - Main Hall:</strong> Multiple hostiles, mortar threat, IED discovery
+                    </div>
+                    <div class="room-item">
+                      <strong>Room 3 - Interrogation:</strong> Intel documents, sniper overwatch threat
+                    </div>
+                    <div class="room-item">
+                      <strong>Room 4 - Exfil:</strong> Secure extraction point, mission complete
+                    </div>
+                  </div>
+                  
+                  <div class="script-actions">
+                    <button class="run-btn" onclick="downloadEscapeRoomCode()">💾 Download Code</button>
+                    <button class="run-btn" onclick="viewGitHubRepo()">🔗 View on GitHub</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1117,6 +1560,185 @@
           </div>
         </div>
       </section>
+
+      <!-- Portfolio Section -->
+      <section class="portfolio-section">
+        <div class="container">
+          <div class="section-header">
+            <h2>Portfolio</h2>
+            <p>Professional experience in AI, robotics, and software engineering</p>
+          </div>
+          
+          <div class="portfolio-grid">
+            <!-- Resume Panel -->
+            <div class="portfolio-panel resume-panel">
+              <div class="portfolio-header">
+                <h3>Jose "Hannibal" Herrera</h3>
+                <p class="title">AI Solutions Engineer & Robotics Developer</p>
+              </div>
+              
+              <div class="contact-info">
+                <div class="contact-item">
+                  <span class="contact-label">Email:</span>
+                  <span class="contact-value">jose.herrera@professional.com</span>
+                </div>
+                <div class="contact-item">
+                  <span class="contact-label">Location:</span>
+                  <span class="contact-value">Remote / Travel Available</span>
+                </div>
+                <div class="contact-item">
+                  <span class="contact-label">GitHub:</span>
+                  <a href="https://github.com/HannnibalKing" target="_blank" class="contact-value">@HannnibalKing</a>
+                </div>
+              </div>
+
+              <div class="resume-section">
+                <h4>Professional Summary</h4>
+                <p>Innovative AI Solutions Engineer with expertise in robotics automation, immersive experience design, and full-stack development. Proven track record of building sophisticated control systems for entertainment, training, and industrial applications. Specializes in integrating AI assistance with hardware automation for enhanced development velocity and system reliability.</p>
+              </div>
+
+              <div class="resume-section">
+                <h4>Core Technologies</h4>
+                <div class="tech-grid">
+                  <div class="tech-category">
+                    <span class="tech-title">AI & Automation</span>
+                    <ul>
+                      <li>AI-Assisted Development</li>
+                      <li>Machine Learning Integration</li>
+                      <li>Process Automation</li>
+                      <li>Intelligent System Design</li>
+                    </ul>
+                  </div>
+                  <div class="tech-category">
+                    <span class="tech-title">Robotics & IoT</span>
+                    <ul>
+                      <li>Arduino/Raspberry Pi</li>
+                      <li>Servo Control Systems</li>
+                      <li>MQTT/WebSocket Protocols</li>
+                      <li>Sensor Integration</li>
+                    </ul>
+                  </div>
+                  <div class="tech-category">
+                    <span class="tech-title">Software Development</span>
+                    <ul>
+                      <li>JavaScript/Node.js</li>
+                      <li>Python/C++</li>
+                      <li>Real-time Systems</li>
+                      <li>API Development</li>
+                    </ul>
+                  </div>
+                  <div class="tech-category">
+                    <span class="tech-title">Specialized Systems</span>
+                    <ul>
+                      <li>DMX Lighting Control</li>
+                      <li>Audio/Visual Systems</li>
+                      <li>Safety & Emergency Systems</li>
+                      <li>Interactive Experience Design</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Projects Showcase -->
+            <div class="portfolio-panel projects-panel">
+              <div class="portfolio-header">
+                <h3>Featured Projects</h3>
+                <p>Showcasing innovation in immersive technology</p>
+              </div>
+
+              <div class="project-item">
+                <div class="project-header">
+                  <h4>Haunted House Robotics Suite</h4>
+                  <span class="project-status">Active Development</span>
+                </div>
+                <p>Comprehensive automation system featuring AI-enhanced development processes, synchronized effects across multiple rooms, and sophisticated safety systems. Demonstrates cutting-edge integration of hardware automation with intelligent software control.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">AI-Assisted</span>
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Arduino</span>
+                  <span class="tech-tag">DMX</span>
+                  <span class="tech-tag">WebSocket</span>
+                </div>
+              </div>
+
+              <div class="project-item">
+                <div class="project-header">
+                  <h4>Combat Escape Room Controller</h4>
+                  <span class="project-status">Production Ready</span>
+                </div>
+                <p>Advanced tactical simulation system with real-time IoT device control, mission scoring algorithms, and comprehensive analytics. Built for immersive training environments with enterprise-grade reliability.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">Express.js</span>
+                  <span class="tech-tag">MQTT</span>
+                  <span class="tech-tag">IoT Control</span>
+                  <span class="tech-tag">Real-time</span>
+                </div>
+              </div>
+
+              <div class="project-item">
+                <div class="project-header">
+                  <h4>Intelligent Scare Coordination</h4>
+                  <span class="project-status">Optimized</span>
+                </div>
+                <p>Predictive scare timing system using sensor fusion and behavioral analysis to maximize visitor engagement while ensuring safety protocols. Features adaptive algorithms that learn from visitor responses.</p>
+                <div class="project-tech">
+                  <span class="tech-tag">ML Analytics</span>
+                  <span class="tech-tag">Sensor Fusion</span>
+                  <span class="tech-tag">Safety Systems</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Capabilities & Services -->
+            <div class="portfolio-panel services-panel">
+              <div class="portfolio-header">
+                <h3>Professional Services</h3>
+                <p>Available for consulting and development projects</p>
+              </div>
+
+              <div class="service-category">
+                <h4>AI-Enhanced Development</h4>
+                <ul>
+                  <li>Rapid prototyping with AI assistance</li>
+                  <li>Intelligent system architecture design</li>
+                  <li>Automated testing and documentation</li>
+                  <li>Code optimization and refactoring</li>
+                </ul>
+              </div>
+
+              <div class="service-category">
+                <h4>Automation Solutions</h4>
+                <ul>
+                  <li>Custom control system development</li>
+                  <li>IoT device integration and management</li>
+                  <li>Real-time monitoring and analytics</li>
+                  <li>Safety system implementation</li>
+                </ul>
+              </div>
+
+              <div class="service-category">
+                <h4>Experience Engineering</h4>
+                <ul>
+                  <li>Immersive environment design</li>
+                  <li>Interactive entertainment systems</li>
+                  <li>Training simulation development</li>
+                  <li>Performance optimization</li>
+                </ul>
+              </div>
+
+              <div class="cta-section">
+                <h4>Ready to Build Something Amazing?</h4>
+                <p>Let's discuss how AI-enhanced development can accelerate your next project.</p>
+                <div class="cta-buttons">
+                  <a href="https://github.com/HannnibalKing" target="_blank" class="cta-button primary">View GitHub</a>
+                  <a href="mailto:jose.herrera@professional.com" class="cta-button secondary">Contact Me</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -1129,50 +1751,50 @@
       const demoScenarios = {
         skeleton: [
           { time: 0, cmd: 'INIT', msg: 'Power on animatronic skeleton core', data: 'Servos: 4/4 online | DMX: Ch 1-16 active', type: 'success' },
-          { time: 100, cmd: 'M05', msg: 'Set head servo to neutral', data: 'Position: 90° | Torque: 2.1kg-cm', progress: 25 },
-          { time: 300, cmd: 'L12', msg: 'Fade DMX wash to ember red', data: 'RGB: [255,85,0] | Brightness: 35%', progress: 40 },
-          { time: 800, cmd: 'S11', msg: 'Idle loop: finger twitch', data: 'Micro movements: ±3° | Freq: 0.2Hz', progress: 55 },
-          { time: 1300, cmd: 'PIR', msg: 'Motion trip detected - VISITOR ENTERS', data: 'Distance: 1.2m | Confidence: 94%', highlight: true, type: 'warning', progress: 70 },
-          { time: 1500, cmd: 'M29', msg: 'Snap head to visitor', data: 'Target angle: 135° | Speed: 180°/s', progress: 80 },
-          { time: 1700, cmd: 'M33', msg: 'Raise both arms', data: 'L-arm: 45° | R-arm: 50° | Sync delta: 0.1s', progress: 85 },
-          { time: 2200, cmd: 'AUX', msg: 'Trigger jaw chatter synced to audio', data: 'Audio file: skeleton_laugh.wav | Duration: 2.3s', progress: 90 },
-          { time: 2700, cmd: 'DMX', msg: 'Flash strobes + cold white backlight', data: 'Strobe: 15Hz | Backlight: 100% | Effect: pulse', progress: 95 },
-          { time: 3200, cmd: 'WAIT', msg: 'Hold pose', data: 'Servo lock engaged | Power: 85% | Hold time: 0.5s', progress: 98 },
-          { time: 3700, cmd: 'RESET', msg: 'Arms down, lights to idle', data: 'Return to home positions | Fade time: 1.0s', type: 'success', progress: 100 }
+          { time: 800, cmd: 'M05', msg: 'Set head servo to neutral', data: 'Position: 90° | Torque: 2.1kg-cm', progress: 25 },
+          { time: 1800, cmd: 'L12', msg: 'Fade DMX wash to ember red', data: 'RGB: [255,85,0] | Brightness: 35%', progress: 40 },
+          { time: 3000, cmd: 'S11', msg: 'Idle loop: finger twitch', data: 'Micro movements: ±3° | Freq: 0.2Hz', progress: 55 },
+          { time: 4500, cmd: 'PIR', msg: 'Motion trip detected - VISITOR ENTERS', data: 'Distance: 1.2m | Confidence: 94%', highlight: true, type: 'warning', progress: 70 },
+          { time: 5200, cmd: 'M29', msg: 'Snap head to visitor', data: 'Target angle: 135° | Speed: 180°/s', progress: 80 },
+          { time: 6000, cmd: 'M33', msg: 'Raise both arms', data: 'L-arm: 45° | R-arm: 50° | Sync delta: 0.1s', progress: 85 },
+          { time: 7200, cmd: 'AUX', msg: 'Trigger jaw chatter synced to audio', data: 'Audio file: skeleton_laugh.wav | Duration: 2.3s', progress: 90 },
+          { time: 8500, cmd: 'DMX', msg: 'Flash strobes + cold white backlight', data: 'Strobe: 15Hz | Backlight: 100% | Effect: pulse', progress: 95 },
+          { time: 9800, cmd: 'WAIT', msg: 'Hold pose', data: 'Servo lock engaged | Power: 85% | Hold time: 0.5s', progress: 98 },
+          { time: 11000, cmd: 'RESET', msg: 'Arms down, lights to idle', data: 'Return to home positions | Fade time: 1.0s', type: 'success', progress: 100 }
         ],
         ghost: [
           { time: 0, cmd: 'INIT', msg: 'Pre-charge carriage and test limit switches', data: 'Stepper: 200 steps/rev | Accel: 400 steps/s²', type: 'success', progress: 10 },
-          { time: 200, cmd: 'L21', msg: 'Set LED strip to cyan breathing', data: 'WS2812: 60 LEDs | Pattern: sine wave | Period: 3s', progress: 20 },
-          { time: 400, cmd: 'PIR', msg: 'Motion detect at hallway - GUEST APPROACH', data: 'Sensor range: 5m | Heat signature detected', highlight: true, type: 'warning', progress: 40 },
-          { time: 600, cmd: 'M14', msg: 'Carriage glide forward 1.2m', data: 'Speed: 800 steps/s | Distance: 1200mm | ETA: 1.5s', progress: 60 },
-          { time: 1200, cmd: 'FX1', msg: 'Fog blast + shriek sample', data: 'Fog duration: 2s | Audio: ghost_shriek.wav | Volume: 85%', progress: 75 },
-          { time: 1600, cmd: 'L99', msg: 'Strobe white / amber alternation', data: 'Frequency: 8Hz | Colors: #FFFFFF/#FFAA00 | Intensity: max', progress: 85 },
-          { time: 2100, cmd: 'WAIT', msg: 'Hover at guest', data: 'Position hold | Servo brake: ON | Duration: 0.5s', progress: 90 },
-          { time: 2600, cmd: 'M02', msg: 'Retreat carriage to home', data: 'Return speed: 1200 steps/s | Home switch active', progress: 95 },
-          { time: 3200, cmd: 'RESET', msg: 'Resume cyan breathing + cooldown', data: 'Cooldown: 10s | Ready for next trigger', type: 'success', progress: 100 }
+          { time: 1000, cmd: 'L21', msg: 'Set LED strip to cyan breathing', data: 'WS2812: 60 LEDs | Pattern: sine wave | Period: 3s', progress: 20 },
+          { time: 2200, cmd: 'PIR', msg: 'Motion detect at hallway - GUEST APPROACH', data: 'Sensor range: 5m | Heat signature detected', highlight: true, type: 'warning', progress: 40 },
+          { time: 3500, cmd: 'M14', msg: 'Carriage glide forward 1.2m', data: 'Speed: 800 steps/s | Distance: 1200mm | ETA: 1.5s', progress: 60 },
+          { time: 5200, cmd: 'FX1', msg: 'Fog blast + shriek sample', data: 'Fog duration: 2s | Audio: ghost_shriek.wav | Volume: 85%', progress: 75 },
+          { time: 6800, cmd: 'L99', msg: 'Strobe white / amber alternation', data: 'Frequency: 8Hz | Colors: #FFFFFF/#FFAA00 | Intensity: max', progress: 85 },
+          { time: 8200, cmd: 'WAIT', msg: 'Hover at guest', data: 'Position hold | Servo brake: ON | Duration: 0.5s', progress: 90 },
+          { time: 9500, cmd: 'M02', msg: 'Retreat carriage to home', data: 'Return speed: 1200 steps/s | Home switch active', progress: 95 },
+          { time: 11000, cmd: 'RESET', msg: 'Resume cyan breathing + cooldown', data: 'Cooldown: 10s | Ready for next trigger', type: 'success', progress: 100 }
         ],
         effects: [
           { time: 0, cmd: 'INIT', msg: 'DMX universe online - 512 channels active', data: 'Protocol: DMX-512 | Baud: 250kbps | Fixtures: 8 online', type: 'success', progress: 15 },
-          { time: 200, cmd: 'FOG1', msg: 'Fog machine 1 heating (30s warm-up)', data: 'Temp: 24°C → 180°C | Fluid level: 85% | Power: 1200W', progress: 25 },
-          { time: 400, cmd: 'FOG2', msg: 'Fog machine 2 heating (30s warm-up)', data: 'Temp: 26°C → 180°C | Fluid level: 92% | Power: 1200W', progress: 35 },
-          { time: 800, cmd: 'L001', msg: 'Par lights 1-4 fade to deep red', data: 'DMX Ch 1-12: RGB[180,0,0] | Fade time: 2s | Dimmer: 75%', progress: 50 },
-          { time: 1200, cmd: 'TRIG', msg: 'Pressure plate activated - GUEST DETECTED', data: 'Weight: 68kg | Plate area: 0.5m² | Trigger threshold exceeded', highlight: true, type: 'warning', progress: 70 },
-          { time: 1400, cmd: 'FIRE', msg: 'Fog blast + flame projector ignition', data: 'Fog output: max | Flame height: 2.1m | Safety interlock: OK', type: 'warning', progress: 85 },
-          { time: 1600, cmd: 'L255', msg: 'Strobe array full intensity', data: 'Xenon strobes: 6 units | Flash rate: 12Hz | Power: 3600W total', progress: 90 },
-          { time: 2000, cmd: 'SND1', msg: 'Thunder crack + explosion sample', data: 'Audio file: thunder_explosion.wav | SPL: 110dB | Duration: 3.2s', progress: 95 },
-          { time: 2400, cmd: 'FADE', msg: 'All effects fade to ambient', data: 'Fade time: 3s | Ambient level: 15% | Fog dissipate: 30s', type: 'success', progress: 100 }
+          { time: 1200, cmd: 'FOG1', msg: 'Fog machine 1 heating (30s warm-up)', data: 'Temp: 24°C → 180°C | Fluid level: 85% | Power: 1200W', progress: 25 },
+          { time: 2500, cmd: 'FOG2', msg: 'Fog machine 2 heating (30s warm-up)', data: 'Temp: 26°C → 180°C | Fluid level: 92% | Power: 1200W', progress: 35 },
+          { time: 4000, cmd: 'L001', msg: 'Par lights 1-4 fade to deep red', data: 'DMX Ch 1-12: RGB[180,0,0] | Fade time: 2s | Dimmer: 75%', progress: 50 },
+          { time: 5800, cmd: 'TRIG', msg: 'Pressure plate activated - GUEST DETECTED', data: 'Weight: 68kg | Plate area: 0.5m² | Trigger threshold exceeded', highlight: true, type: 'warning', progress: 70 },
+          { time: 7200, cmd: 'FIRE', msg: 'Fog blast + flame projector ignition', data: 'Fog output: max | Flame height: 2.1m | Safety interlock: OK', type: 'warning', progress: 85 },
+          { time: 8500, cmd: 'L255', msg: 'Strobe array full intensity', data: 'Xenon strobes: 6 units | Flash rate: 12Hz | Power: 3600W total', progress: 90 },
+          { time: 10000, cmd: 'SND1', msg: 'Thunder crack + explosion sample', data: 'Audio file: thunder_explosion.wav | SPL: 110dB | Duration: 3.2s', progress: 95 },
+          { time: 12000, cmd: 'FADE', msg: 'All effects fade to ambient', data: 'Fade time: 3s | Ambient level: 15% | Fog dissipate: 30s', type: 'success', progress: 100 }
         ],
         combat: [
           { time: 0, cmd: 'BOOT', msg: '[CLASSIFIED] Tactical simulation initializing...', data: 'Scenario: Urban CQB | Hostiles: 6 | Civilians: 2 | Intel: HIGH', type: 'warning', progress: 5 },
-          { time: 500, cmd: 'SITR', msg: 'SITUATION: Insurgent compound, 4 rooms, 6 hostiles', data: 'Threat level: SEVERE | Rules of engagement: WEAPONS FREE', progress: 15 },
-          { time: 1000, cmd: 'R001', msg: 'ENTRY POINT: Breached wall, smoke grenades deployed', data: 'Breach charge: 2kg C4 | Smoke duration: 45s | Visibility: <2m', progress: 30 },
-          { time: 1500, cmd: 'CONT', msg: 'Contact front! AK-47 muzzle flash detected', data: 'Weapon ID: AK-47 | Range: 15m | Suppressive fire initiated', highlight: true, type: 'error', progress: 50 },
-          { time: 2000, cmd: 'MORTAR', msg: 'Incoming 82mm mortar - TAKE COVER!', data: 'Impact ETA: 3.2s | Blast radius: 20m | DANGER CLOSE', type: 'error', progress: 60 },
-          { time: 2200, cmd: 'EXPL', msg: 'Explosion 15m northeast - debris shower active', data: 'Blast yield: ~2kg TNT | Debris field: 30m | Casualties: 0', type: 'warning', progress: 70 },
-          { time: 2800, cmd: 'R002', msg: 'Room 2 cleared - IED discovered under stairwell', data: 'Device type: Pressure plate IED | Payload: unknown | EOD requested', progress: 80 },
-          { time: 3400, cmd: 'SNIPER', msg: 'Sniper fire from compound roof - suppressing', data: 'Caliber: 7.62x54R | Range: 200m | Counter-sniper engaged', type: 'warning', progress: 85 },
-          { time: 4000, cmd: 'R003', msg: 'Interrogation room - intel documents secured', data: 'Documents: 15 pages | Language: Arabic | Classification: SECRET', progress: 95 },
-          { time: 4600, cmd: 'EVAC', msg: 'Extraction point reached - mission complete', data: 'Casualties: 0 KIA, 2 WIA | Intel recovered | Exfil: Black Hawk', type: 'success', progress: 100 }
+          { time: 2000, cmd: 'SITR', msg: 'SITUATION: Insurgent compound, 4 rooms, 6 hostiles', data: 'Threat level: SEVERE | Rules of engagement: WEAPONS FREE', progress: 15 },
+          { time: 4500, cmd: 'R001', msg: 'ENTRY POINT: Breached wall, smoke grenades deployed', data: 'Breach charge: 2kg C4 | Smoke duration: 45s | Visibility: <2m', progress: 30 },
+          { time: 7000, cmd: 'CONT', msg: 'Contact front! AK-47 muzzle flash detected', data: 'Weapon ID: AK-47 | Range: 15m | Suppressive fire initiated', highlight: true, type: 'error', progress: 50 },
+          { time: 9500, cmd: 'MORTAR', msg: 'Incoming 82mm mortar - TAKE COVER!', data: 'Impact ETA: 3.2s | Blast radius: 20m | DANGER CLOSE', type: 'error', progress: 60 },
+          { time: 11000, cmd: 'EXPL', msg: 'Explosion 15m northeast - debris shower active', data: 'Blast yield: ~2kg TNT | Debris field: 30m | Casualties: 0', type: 'warning', progress: 70 },
+          { time: 13500, cmd: 'R002', msg: 'Room 2 cleared - IED discovered under stairwell', data: 'Device type: Pressure plate IED | Payload: unknown | EOD requested', progress: 80 },
+          { time: 16000, cmd: 'SNIPER', msg: 'Sniper fire from compound roof - suppressing', data: 'Caliber: 7.62x54R | Range: 200m | Counter-sniper engaged', type: 'warning', progress: 85 },
+          { time: 18500, cmd: 'R003', msg: 'Interrogation room - intel documents secured', data: 'Documents: 15 pages | Language: Arabic | Classification: SECRET', progress: 95 },
+          { time: 21000, cmd: 'EVAC', msg: 'Extraction point reached - mission complete', data: 'Casualties: 0 KIA, 2 WIA | Intel recovered | Exfil: Black Hawk', type: 'success', progress: 100 }
         ]
       };
 
@@ -1527,6 +2149,29 @@
           document.getElementById('room3').querySelector('.status-light').className = 'status-light red';
           document.getElementById('room4').className = 'room-status room-maintenance';
         }, 500);
+      }
+
+      function viewEscapeRoomScript() {
+        const scriptPanel = document.getElementById('scriptPanel');
+        if (scriptPanel.style.display === 'none') {
+          scriptPanel.style.display = 'block';
+        } else {
+          scriptPanel.style.display = 'none';
+        }
+      }
+
+      function downloadEscapeRoomCode() {
+        // Create a link to download the escape room code
+        const link = document.createElement('a');
+        link.href = 'https://raw.githubusercontent.com/HannnibalKing/Haunted-House-Robotics-DMX/main/combat_escape_room/escape_room_controller.js';
+        link.download = 'combat_escape_room_controller.js';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      function viewGitHubRepo() {
+        window.open('https://github.com/HannnibalKing/Haunted-House-Robotics-DMX/tree/main/combat_escape_room', '_blank');
       }
     </script>
   </body>
