@@ -341,24 +341,306 @@
       }
 
       /* Control Room Styles */
-      .control-grid {
+      .control-grid-advanced {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
         gap: 24px;
         margin-top: 24px;
       }
 
-      .status-panel, .diagnostic-panel {
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid var(--border);
+      .status-panel-main {
+        background: rgba(0, 0, 0, 0.6);
+        border: 2px solid rgba(0, 255, 136, 0.3);
         border-radius: 16px;
         padding: 24px;
+        box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
       }
 
-      .status-panel h3, .diagnostic-panel h3 {
+      .monitor-array {
+        background: rgba(0, 0, 0, 0.6);
+        border: 2px solid rgba(124, 92, 255, 0.3);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 0 30px rgba(124, 92, 255, 0.1);
+      }
+
+      .diagnostic-panel-advanced {
+        grid-column: 1 / -1;
+        background: rgba(0, 0, 0, 0.6);
+        border: 2px solid rgba(255, 95, 95, 0.3);
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 0 30px rgba(255, 95, 95, 0.1);
+      }
+
+      .status-panel-main h3, .monitor-array h3, .diagnostic-panel-advanced h3 {
         margin: 0 0 20px 0;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         color: var(--accent);
+        text-shadow: 0 0 10px rgba(255, 95, 95, 0.3);
+      }
+
+      .room-stats {
+        display: flex;
+        gap: 8px;
+        margin-top: 8px;
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+
+      .room-stats span {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2px 6px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Monitor Styles */
+      .monitors-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .monitor {
+        background: #1a1a1a;
+        border: 3px solid #333;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .monitor-active {
+        border-color: #00ff88;
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+      }
+
+      .monitor-failed {
+        border-color: #ff4444;
+        box-shadow: 0 0 20px rgba(255, 68, 68, 0.3);
+        animation: flicker 3s infinite;
+      }
+
+      .monitor-warning {
+        border-color: #ffaa00;
+        box-shadow: 0 0 20px rgba(255, 170, 0, 0.2);
+      }
+
+      @keyframes flicker {
+        0%, 95%, 100% { opacity: 1; }
+        96%, 99% { opacity: 0.7; }
+      }
+
+      .monitor-header {
+        background: #0a0a0a;
+        color: #00ff88;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #333;
+      }
+
+      .monitor-failed .monitor-header {
+        color: #ff4444;
+      }
+
+      .monitor-warning .monitor-header {
+        color: #ffaa00;
+      }
+
+      .signal-strength {
+        width: 20px;
+        height: 12px;
+        background: linear-gradient(to right, 
+          #00ff88 0%, #00ff88 25%, 
+          #44ff88 25%, #44ff88 50%, 
+          #88ff88 50%, #88ff88 75%, 
+          #ccffcc 75%, #ccffcc 100%);
+        border-radius: 2px;
+        position: relative;
+      }
+
+      .signal-strength.failed {
+        background: #ff4444;
+        animation: pulse 1s infinite;
+      }
+
+      .signal-strength.warning {
+        background: linear-gradient(to right, 
+          #ffaa00 0%, #ffaa00 50%, 
+          #666 50%, #666 100%);
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+      }
+
+      .monitor-content {
+        height: 80px;
+        padding: 12px;
+        background: #0a0a0a;
+      }
+
+      .live-feed {
+        height: 100%;
+        font-family: "Fira Code", monospace;
+        font-size: 0.7rem;
+        color: #00ff88;
+      }
+
+      .feed-data {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .data-line {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .value-good { color: #00ff88; }
+      .value-normal { color: #88aaff; }
+      .value-error { color: #ff4444; font-weight: bold; }
+
+      .error-screen {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        color: #ff4444;
+        text-align: center;
+        position: relative;
+      }
+
+      .error-text {
+        font-weight: bold;
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+      }
+
+      .error-code {
+        font-size: 0.7rem;
+        color: #cc3333;
+      }
+
+      .static-lines {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(255, 68, 68, 0.1) 2px,
+          rgba(255, 68, 68, 0.1) 4px
+        );
+        animation: static 0.5s infinite linear;
+      }
+
+      @keyframes static {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(8px); }
+      }
+
+      .power-graph {
+        width: 100%;
+        height: 40px;
+      }
+
+      .power-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+        font-size: 0.7rem;
+      }
+
+      /* Enhanced Terminal */
+      .terminal-advanced {
+        background: #000;
+        border: 2px solid #333;
+        border-radius: 12px;
+        font-family: "Fira Code", "Cascadia Code", monospace;
+        font-size: 0.85rem;
+        height: 250px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      }
+
+      .terminal-advanced .terminal-header {
+        background: #1a1a1a;
+        color: #00ff88;
+        padding: 8px 12px;
+        border-bottom: 2px solid #333;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .terminal-indicators {
+        display: flex;
+        gap: 6px;
+      }
+
+      .indicator {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        animation: blink 2s infinite;
+      }
+
+      .indicator.active {
+        background: #00ff88;
+        box-shadow: 0 0 6px rgba(0, 255, 136, 0.5);
+      }
+
+      .indicator.warning {
+        background: #ffaa00;
+        box-shadow: 0 0 6px rgba(255, 170, 0, 0.5);
+      }
+
+      .terminal-content-advanced {
+        padding: 12px;
+        color: #e0e0e0;
+        white-space: pre-wrap;
+        font-family: inherit;
+        line-height: 1.4;
+        height: calc(100% - 40px);
+        overflow-y: auto;
+        scroll-behavior: smooth;
+      }
+
+      .reset-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        background: linear-gradient(135deg, #7c5cff, #5c4cdd);
+        color: white;
+      }
+
+      .reset-btn:hover {
+        background: linear-gradient(135deg, #6c4cef, #4c3ccd);
+        transform: translateY(-1px);
+      }
+
+      @media (max-width: 768px) {
+        .control-grid-advanced {
+          grid-template-columns: 1fr;
+        }
+        
+        .monitors-grid {
+          grid-template-columns: 1fr;
+        }
       }
 
       .room-grid {
@@ -584,49 +866,149 @@
 
       <section id="control-room">
         <span class="badge">Mission Control</span>
-        <h2>Haunted House Control Room</h2>
-        <p>Real-time monitoring and diagnostics for all robotics systems across the haunted attraction.</p>
+        <h2>🎮 Advanced Control Center</h2>
+        <p>Real-time monitoring, telemetry streaming, and diagnostics for all robotics systems across the haunted attraction.</p>
         
-        <div class="control-grid">
-          <div class="status-panel">
-            <h3>🏠 Room Status Overview</h3>
+        <div class="control-grid-advanced">
+          <!-- Main Status Display -->
+          <div class="status-panel-main">
+            <h3>🏠 Facility Overview</h3>
             <div class="room-grid">
               <div class="room-status room-ok" id="room1">
                 <div class="room-number">1</div>
                 <div class="room-name">Entrance Hall</div>
                 <div class="status-light green"></div>
                 <div class="room-info">Skeleton: OPERATIONAL</div>
+                <div class="room-stats">
+                  <span>⚡ 12.1V</span>
+                  <span>🌡️ 42°C</span>
+                  <span>📶 98%</span>
+                </div>
               </div>
               <div class="room-status room-ok" id="room2">
                 <div class="room-number">2</div>
                 <div class="room-name">Ghost Corridor</div>
                 <div class="status-light green"></div>
                 <div class="room-info">Motion System: ACTIVE</div>
+                <div class="room-stats">
+                  <span>⚡ 11.9V</span>
+                  <span>🌡️ 38°C</span>
+                  <span>📶 94%</span>
+                </div>
               </div>
               <div class="room-status room-error" id="room3">
                 <div class="room-number">3</div>
                 <div class="room-name">Chamber of Terror</div>
                 <div class="status-light red"></div>
-                <div class="room-info">Servo Malfunction Detected</div>
+                <div class="room-info">SERVO FAULT - BACKUP ACTIVE</div>
+                <div class="room-stats">
+                  <span>⚡ 10.2V</span>
+                  <span>🌡️ 71°C</span>
+                  <span>📶 45%</span>
+                </div>
               </div>
               <div class="room-status room-maintenance" id="room4">
                 <div class="room-number">4</div>
                 <div class="room-name">Exit Portal</div>
                 <div class="status-light yellow"></div>
                 <div class="room-info">Scheduled Maintenance</div>
+                <div class="room-stats">
+                  <span>⚡ 12.3V</span>
+                  <span>🌡️ 35°C</span>
+                  <span>📶 89%</span>
+                </div>
               </div>
             </div>
           </div>
           
-          <div class="diagnostic-panel">
+          <!-- Monitor Array -->
+          <div class="monitor-array">
+            <h3>📺 Surveillance & Telemetry</h3>
+            <div class="monitors-grid">
+              <div class="monitor monitor-active" id="monitor1">
+                <div class="monitor-header">
+                  <span>CAM-01 | ENTRANCE</span>
+                  <div class="signal-strength"></div>
+                </div>
+                <div class="monitor-content">
+                  <div class="live-feed" id="feed1">
+                    <div class="feed-data">
+                      <div class="data-line">MOTION: <span class="value-good">CLEAR</span></div>
+                      <div class="data-line">LIGHT: <span class="value-normal">85%</span></div>
+                      <div class="data-line">AUDIO: <span class="value-good">-12dB</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="monitor monitor-failed" id="monitor2">
+                <div class="monitor-header">
+                  <span>CAM-02 | CORRIDOR</span>
+                  <div class="signal-strength failed"></div>
+                </div>
+                <div class="monitor-content">
+                  <div class="live-feed failed">
+                    <div class="error-screen">
+                      <div class="error-text">SIGNAL LOST</div>
+                      <div class="error-code">ERR: 0x4F2A</div>
+                      <div class="static-lines"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="monitor monitor-active" id="monitor3">
+                <div class="monitor-header">
+                  <span>SYS-03 | POWER GRID</span>
+                  <div class="signal-strength"></div>
+                </div>
+                <div class="monitor-content">
+                  <div class="live-feed" id="feed3">
+                    <canvas class="power-graph" id="powerGraph" width="120" height="60"></canvas>
+                    <div class="power-stats">
+                      <div>LOAD: <span id="powerLoad">67%</span></div>
+                      <div>FREQ: <span id="powerFreq">60.1Hz</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="monitor monitor-warning" id="monitor4">
+                <div class="monitor-header">
+                  <span>ROBOT-04 | CHAMBER</span>
+                  <div class="signal-strength warning"></div>
+                </div>
+                <div class="monitor-content">
+                  <div class="live-feed" id="feed4">
+                    <div class="feed-data">
+                      <div class="data-line">STATUS: <span class="value-error">FAULT</span></div>
+                      <div class="data-line">TEMP: <span class="value-error">71°C</span></div>
+                      <div class="data-line">SERVO: <span class="value-error">TIMEOUT</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Enhanced Diagnostic Panel -->
+          <div class="diagnostic-panel-advanced">
             <h3>🔧 System Diagnostics</h3>
             <div class="controls">
-              <button class="run-btn" onclick="runControlRoom()">🚨 Run System Check</button>
-              <button class="stop-btn" onclick="stopControlRoom()">⏹️ Abort Diagnostics</button>
+              <button class="run-btn" onclick="runControlRoom()">🚨 Run Deep Scan</button>
+              <button class="stop-btn" onclick="stopControlRoom()">⏹️ Abort</button>
+              <button class="reset-btn" onclick="resetSystems()">🔄 Reset All</button>
             </div>
-            <div class="terminal" id="control-terminal">
-              <div class="terminal-header">HAUNTED_HOUSE_CONTROL v2.3.1</div>
-              <div class="terminal-content" id="control-output">Control room online. All systems monitoring... Click RUN SYSTEM CHECK to diagnose Room 3 malfunction.</div>
+            <div class="terminal-advanced" id="control-terminal">
+              <div class="terminal-header">
+                <span>HAUNTED_HOUSE_CONTROL v3.1.2</span>
+                <div class="terminal-indicators">
+                  <div class="indicator active"></div>
+                  <div class="indicator active"></div>
+                  <div class="indicator warning"></div>
+                </div>
+              </div>
+              <div class="terminal-content-advanced" id="control-output">Control room online. All systems monitoring... Click RUN DEEP SCAN to diagnose system anomalies.</div>
             </div>
           </div>
         </div>
@@ -710,6 +1092,112 @@
       let demoTimeout = null;
       let controlRoomActive = false;
       let controlTimeout = null;
+      let streamingActive = false;
+      let streamingIntervals = [];
+
+      // Start streaming data on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        startDataStreaming();
+        initPowerGraph();
+      });
+
+      function startDataStreaming() {
+        if (streamingActive) return;
+        streamingActive = true;
+
+        // Stream data for Feed 1 (Entrance)
+        streamingIntervals.push(setInterval(() => {
+          const feed1 = document.getElementById('feed1');
+          if (feed1) {
+            const motion = Math.random() > 0.8 ? 'DETECTED' : 'CLEAR';
+            const light = Math.floor(80 + Math.random() * 20);
+            const audio = Math.floor(-15 + Math.random() * 8);
+            
+            feed1.innerHTML = `
+              <div class="feed-data">
+                <div class="data-line">MOTION: <span class="value-${motion === 'CLEAR' ? 'good' : 'error'}">${motion}</span></div>
+                <div class="data-line">LIGHT: <span class="value-normal">${light}%</span></div>
+                <div class="data-line">AUDIO: <span class="value-good">${audio}dB</span></div>
+              </div>
+            `;
+          }
+        }, 2000));
+
+        // Stream data for Feed 4 (Chamber Robot)
+        streamingIntervals.push(setInterval(() => {
+          const feed4 = document.getElementById('feed4');
+          if (feed4) {
+            const temp = Math.floor(68 + Math.random() * 8);
+            const tempClass = temp > 70 ? 'error' : temp > 65 ? 'warning' : 'normal';
+            
+            feed4.innerHTML = `
+              <div class="feed-data">
+                <div class="data-line">STATUS: <span class="value-error">FAULT</span></div>
+                <div class="data-line">TEMP: <span class="value-${tempClass}">${temp}°C</span></div>
+                <div class="data-line">SERVO: <span class="value-error">TIMEOUT</span></div>
+              </div>
+            `;
+          }
+        }, 1500));
+
+        // Update power stats
+        streamingIntervals.push(setInterval(() => {
+          const powerLoad = document.getElementById('powerLoad');
+          const powerFreq = document.getElementById('powerFreq');
+          if (powerLoad && powerFreq) {
+            powerLoad.textContent = Math.floor(60 + Math.random() * 20) + '%';
+            powerFreq.textContent = (59.8 + Math.random() * 0.4).toFixed(1) + 'Hz';
+          }
+        }, 3000));
+      }
+
+      function initPowerGraph() {
+        const canvas = document.getElementById('powerGraph');
+        if (!canvas) return;
+        
+        const ctx = canvas.getContext('2d');
+        let dataPoints = Array(60).fill(0).map(() => Math.random() * 0.5 + 0.5);
+        
+        function drawGraph() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Add new data point
+          dataPoints.push(Math.random() * 0.3 + 0.6);
+          dataPoints.shift();
+          
+          // Draw grid
+          ctx.strokeStyle = '#333';
+          ctx.lineWidth = 1;
+          for (let i = 0; i < 6; i++) {
+            const y = (i * canvas.height) / 5;
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+          }
+          
+          // Draw power curve
+          ctx.strokeStyle = '#00ff88';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          
+          for (let i = 0; i < dataPoints.length; i++) {
+            const x = (i * canvas.width) / (dataPoints.length - 1);
+            const y = canvas.height - (dataPoints[i] * canvas.height);
+            
+            if (i === 0) {
+              ctx.moveTo(x, y);
+            } else {
+              ctx.lineTo(x, y);
+            }
+          }
+          ctx.stroke();
+        }
+        
+        // Update graph every second
+        streamingIntervals.push(setInterval(drawGraph, 1000));
+        drawGraph(); // Initial draw
+      }
 
       function runDemo(type) {
         if (activeDemo) stopDemo(activeDemo);
@@ -754,8 +1242,10 @@
           
           output.innerHTML += logHtml;
           
-          // Auto-scroll to bottom with smooth behavior
-          output.scrollTop = output.scrollHeight;
+          // Force scroll to bottom after adding content
+          setTimeout(() => {
+            output.scrollTop = output.scrollHeight;
+          }, 10);
           
           stepIndex++;
           
@@ -766,6 +1256,9 @@
             setTimeout(() => {
               if (activeDemo === type) {
                 output.innerHTML += '<div class="log-entry log-success">✓ Sequence complete. Ready for next run...</div>';
+                setTimeout(() => {
+                  output.scrollTop = output.scrollHeight;
+                }, 10);
                 activeDemo = null;
               }
             }, 500);
@@ -840,7 +1333,11 @@
           logHtml += '</div>';
           
           output.innerHTML += logHtml;
-          output.scrollTop = output.scrollHeight;
+          
+          // Force scroll to bottom after adding content
+          setTimeout(() => {
+            output.scrollTop = output.scrollHeight;
+          }, 10);
           
           stepIndex++;
           
@@ -851,6 +1348,9 @@
             setTimeout(() => {
               if (controlRoomActive) {
                 output.innerHTML += '<div class="log-entry log-success">✓ Diagnostic complete. All systems monitored.</div>';
+                setTimeout(() => {
+                  output.scrollTop = output.scrollHeight;
+                }, 10);
                 controlRoomActive = false;
               }
             }, 500);
@@ -866,15 +1366,44 @@
           clearTimeout(controlTimeout);
           const output = document.getElementById('control-output');
           output.innerHTML += '<div class="log-entry log-error">🛑 Diagnostic aborted - Control room standing by</div>';
-          output.scrollTop = output.scrollHeight;
+          setTimeout(() => {
+            output.scrollTop = output.scrollHeight;
+          }, 10);
           
           // Reset room statuses
           setTimeout(() => {
             document.getElementById('room3').className = 'room-status room-error';
-            document.getElementById('room3').querySelector('.room-info').textContent = 'Servo Malfunction Detected';
+            document.getElementById('room3').querySelector('.room-info').textContent = 'SERVO FAULT - BACKUP ACTIVE';
             document.getElementById('room3').querySelector('.status-light').className = 'status-light red';
           }, 1000);
         }
+      }
+
+      function resetSystems() {
+        // Stop all running demos and control room
+        if (activeDemo) stopDemo(activeDemo);
+        if (controlRoomActive) stopControlRoom();
+        
+        // Reset all terminals
+        const terminals = ['skeleton-output', 'ghost-output', 'effects-output', 'combat-output', 'control-output'];
+        terminals.forEach(id => {
+          const output = document.getElementById(id);
+          if (output) {
+            output.innerHTML = output.id === 'control-output' ? 
+              'Systems reset. All terminals cleared. Ready for new operations...' :
+              'Ready. Press START to begin...';
+          }
+        });
+        
+        // Reset room statuses to original state
+        setTimeout(() => {
+          document.getElementById('room1').className = 'room-status room-ok';
+          document.getElementById('room2').className = 'room-status room-ok';
+          document.getElementById('room3').className = 'room-status room-error';
+          document.getElementById('room3').querySelector('.room-info').textContent = 'SERVO FAULT - BACKUP ACTIVE';
+          document.getElementById('room3').querySelector('.status-light').className = 'status-light red';
+          document.getElementById('room4').className = 'room-status room-maintenance';
+        }, 500);
       }
     </script>
   </body>
