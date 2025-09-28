@@ -32,8 +32,59 @@
         line-height: 1.6;
       }
 
+      /* Top Navigation */
+      .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(20, 20, 32, 0.95);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        z-index: 1000;
+        padding: 12px 0;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-weight: 600;
+        color: var(--accent);
+        font-size: 1.1rem;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-btn {
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        text-decoration: none;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .nav-btn:hover {
+        background: var(--accent-2);
+        color: white;
+        transform: translateY(-1px);
+      }
+
       header {
-        padding: 80px 20px 40px;
+        padding: 120px 20px 40px;
         text-align: center;
         position: relative;
         overflow: hidden;
@@ -90,6 +141,12 @@
       .cta a.secondary {
         border-color: var(--border);
         background: rgba(255, 255, 255, 0.04);
+      }
+
+      .cta a.tertiary {
+        background: linear-gradient(135deg, var(--accent-2), rgba(124, 92, 255, 0.8));
+        color: white;
+        border: 1px solid var(--accent-2);
       }
 
       .cta a:hover {
@@ -213,12 +270,13 @@
       .portfolio-panel {
         background: var(--panel);
         border-radius: 16px;
-        padding: 40px;
+        padding: 35px;
         border: 1px solid var(--border);
         backdrop-filter: blur(20px);
         transition: transform 0.3s ease, border-color 0.3s ease;
         overflow: hidden;
         box-sizing: border-box;
+        min-width: 0;
       }
 
       .portfolio-panel:hover {
@@ -530,6 +588,258 @@
         
         .cta-button {
           width: 200px;
+        }
+
+        .nav-buttons {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+
+      /* Scare Experience App Styles */
+      .app-showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .app-panel {
+        background: var(--panel);
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+      }
+
+      .app-panel h3 {
+        color: var(--accent);
+        margin: 0 0 20px 0;
+        font-size: 1.4rem;
+      }
+
+      .architecture-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .stack-layer {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+
+      .stack-layer:hover {
+        background: rgba(0, 0, 0, 0.4);
+        border-color: var(--accent-2);
+      }
+
+      .stack-layer.frontend {
+        border-left: 4px solid #61DAFB;
+      }
+
+      .stack-layer.backend {
+        border-left: 4px solid #68A063;
+      }
+
+      .stack-layer.database {
+        border-left: 4px solid #4DB33D;
+      }
+
+      .stack-title {
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 12px;
+        font-size: 1.1rem;
+      }
+
+      .stack-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .tech-item {
+        font-size: 0.9rem;
+        color: var(--muted);
+        padding: 4px 0;
+      }
+
+      .hardware-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+      }
+
+      .hw-category {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+      }
+
+      .hw-category h4 {
+        color: var(--accent-2);
+        margin: 0 0 12px 0;
+        font-size: 1rem;
+      }
+
+      .hw-category ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .hw-category li {
+        color: var(--text);
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        padding-left: 16px;
+        position: relative;
+      }
+
+      .hw-category li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+
+      .hw-category strong {
+        color: var(--accent-2);
+      }
+
+      .ai-features {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .feature-item {
+        display: flex;
+        gap: 15px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+      }
+
+      .feature-item:hover {
+        background: rgba(0, 0, 0, 0.3);
+        border-color: var(--accent-2);
+      }
+
+      .feature-icon {
+        font-size: 2rem;
+        width: 50px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .feature-content h4 {
+        color: var(--accent);
+        margin: 0 0 8px 0;
+        font-size: 1.1rem;
+      }
+
+      .feature-content p {
+        color: var(--text);
+        margin: 0 0 10px 0;
+        line-height: 1.6;
+        font-size: 0.9rem;
+      }
+
+      .feature-tech {
+        color: var(--accent-2);
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .app-controls {
+        margin-top: 40px;
+        background: var(--panel);
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        backdrop-filter: blur(10px);
+      }
+
+      .app-controls h3 {
+        color: var(--accent);
+        margin: 0 0 20px 0;
+        font-size: 1.4rem;
+      }
+
+      .demo-controls {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .demo-btn {
+        background: linear-gradient(135deg, var(--accent), #e53e3e);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .demo-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 95, 95, 0.4);
+      }
+
+      .demo-btn.secondary {
+        background: linear-gradient(135deg, var(--accent-2), #6B46C1);
+      }
+
+      .demo-btn.secondary:hover {
+        box-shadow: 0 8px 25px rgba(124, 92, 255, 0.4);
+      }
+
+      .demo-btn.tertiary {
+        background: linear-gradient(135deg, #059669, #047857);
+      }
+
+      .demo-btn.tertiary:hover {
+        box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+      }
+
+      .app-terminal {
+        background: #0a0a0f;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        font-family: 'Courier New', monospace;
+        overflow: hidden;
+      }
+
+      @media (max-width: 768px) {
+        .app-showcase-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .stack-details {
+          grid-template-columns: 1fr;
+        }
+        
+        .demo-controls {
+          flex-direction: column;
+        }
+        
+        .demo-btn {
+          justify-content: center;
         }
       }
 
@@ -1380,18 +1690,32 @@
           grid-template-columns: 1fr;
         }
       }
-    </style>
   </head>
   <body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+      <div class="nav-container">
+        <div class="nav-logo">
+          <span>🎪 Haunted House Robotics</span>
+        </div>
+        <div class="nav-buttons">
+          <a href="https://github.com/HannnibalKing/Haunted-House-Robotics-DMX" target="_blank" class="nav-btn">📁 View Repository</a>
+          <a href="#terminal" class="nav-btn">💻 Run Terminal Demo</a>
+          <a href="#portfolio" class="nav-btn">👨‍💻 Portfolio</a>
+        </div>
+      </div>
+    </nav>
+
     <header>
       <h1>Haunted House Robotics</h1>
       <p class="lead">
-        A trio of Halloween-ready automation demos showcasing servo animatronics, motion FX, and an
-        AI-enhanced guest experience app. Built with Arduino, DMX lighting, React Native, and a dash of theatrics.
+        A comprehensive automation suite showcasing servo animatronics, motion FX, combat simulations, and an
+        AI-enhanced guest experience app. Built with Arduino, DMX lighting, Node.js, React Native, and professional-grade hardware.
       </p>
       <div class="cta">
         <a class="primary" href="https://github.com/HannnibalKing/Haunted-House-Robotics-DMX" target="_blank" rel="noopener">View Repository</a>
         <a class="secondary" href="#terminal">Run Terminal Demo</a>
+        <a class="tertiary" href="#portfolio">View Portfolio</a>
       </div>
     </header>
 
@@ -1537,6 +1861,153 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scare Experience App Framework -->
+      <section id="scare-app">
+        <span class="badge">Guest Experience Platform</span>
+        <h2>📱 Scare Experience App Framework</h2>
+        <p>Intelligent guest experience platform with predictive analytics, real-time visitor tracking, and adaptive scare coordination.</p>
+        
+        <div class="app-showcase-grid">
+          <!-- App Architecture Panel -->
+          <div class="app-panel">
+            <h3>🏗️ Application Architecture</h3>
+            <div class="architecture-stack">
+              <div class="stack-layer frontend">
+                <div class="stack-title">Frontend (React Native)</div>
+                <div class="stack-details">
+                  <div class="tech-item">📱 Cross-platform mobile app</div>
+                  <div class="tech-item">🎨 Real-time guest interface</div>
+                  <div class="tech-item">📍 Location-based services</div>
+                  <div class="tech-item">🔔 Push notification system</div>
+                </div>
+              </div>
+              
+              <div class="stack-layer backend">
+                <div class="stack-title">Backend (Node.js + Express)</div>
+                <div class="stack-details">
+                  <div class="tech-item">🚀 RESTful API server</div>
+                  <div class="tech-item">⚡ WebSocket real-time events</div>
+                  <div class="tech-item">🤖 AI/ML analytics engine</div>
+                  <div class="tech-item">📊 Performance monitoring</div>
+                </div>
+              </div>
+              
+              <div class="stack-layer database">
+                <div class="stack-title">Data Layer (MongoDB + Redis)</div>
+                <div class="stack-details">
+                  <div class="tech-item">📈 Guest behavior analytics</div>
+                  <div class="tech-item">⚡ Real-time session caching</div>
+                  <div class="tech-item">🎯 Predictive scare timing</div>
+                  <div class="tech-item">📊 Performance metrics</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Hardware Integration Panel -->
+          <div class="app-panel">
+            <h3>🔧 Hardware Integration Stack</h3>
+            <div class="hardware-stack">
+              <div class="hw-category">
+                <h4>📡 Communication Layer</h4>
+                <ul>
+                  <li><strong>MQTT Broker:</strong> Eclipse Mosquitto</li>
+                  <li><strong>Protocol:</strong> WebSocket over SSL</li>
+                  <li><strong>Network:</strong> 802.11ac Wi-Fi mesh</li>
+                  <li><strong>Failover:</strong> 4G LTE backup</li>
+                </ul>
+              </div>
+              
+              <div class="hw-category">
+                <h4>📊 Sensor Network</h4>
+                <ul>
+                  <li><strong>Motion Detection:</strong> PIR + Ultrasonic arrays</li>
+                  <li><strong>Proximity:</strong> Bluetooth 5.0 beacons</li>
+                  <li><strong>Biometric:</strong> Heart rate monitoring</li>
+                  <li><strong>Environmental:</strong> Temperature/humidity</li>
+                </ul>
+              </div>
+              
+              <div class="hw-category">
+                <h4>🎭 Effect Controllers</h4>
+                <ul>
+                  <li><strong>Servo Control:</strong> 32-channel PWM drivers</li>
+                  <li><strong>Lighting:</strong> DMX-512 universe control</li>
+                  <li><strong>Audio:</strong> Multi-zone PA system</li>
+                  <li><strong>Environmental:</strong> Fog/haze machines</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- AI Features Panel -->
+          <div class="app-panel">
+            <h3>🤖 AI-Enhanced Features</h3>
+            <div class="ai-features">
+              <div class="feature-item">
+                <div class="feature-icon">🧠</div>
+                <div class="feature-content">
+                  <h4>Predictive Scare Timing</h4>
+                  <p>Machine learning algorithms analyze guest behavior patterns to optimize scare effectiveness and timing.</p>
+                  <div class="feature-tech">TensorFlow.js • Behavioral Analytics</div>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-content">
+                  <h4>Adaptive Experience Engine</h4>
+                  <p>Real-time adjustment of difficulty and intensity based on guest reactions and group dynamics.</p>
+                  <div class="feature-tech">Real-time ML • Dynamic Scaling</div>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon">👥</div>
+                <div class="feature-content">
+                  <h4>Group Behavior Analysis</h4>
+                  <p>Advanced crowd dynamics modeling to coordinate multi-room experiences and prevent bottlenecks.</p>
+                  <div class="feature-tech">Computer Vision • Crowd Analytics</div>
+                </div>
+              </div>
+              
+              <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-content">
+                  <h4>Performance Optimization</h4>
+                  <p>Continuous system monitoring with auto-scaling and predictive maintenance alerts.</p>
+                  <div class="feature-tech">APM • Predictive Analytics</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- App Demo Controls -->
+        <div class="app-controls">
+          <h3>📱 Experience App Demo</h3>
+          <div class="demo-controls">
+            <button class="demo-btn" onclick="runAppDemo()">🚀 Launch App Simulation</button>
+            <button class="demo-btn secondary" onclick="viewAppRepo()">📂 View Source Code</button>
+            <button class="demo-btn tertiary" onclick="downloadAppFramework()">⬇️ Download Framework</button>
+          </div>
+          
+          <div class="app-terminal" id="app-demo-terminal">
+            <div class="terminal-header">
+              <span>SCARE_EXPERIENCE_APP v2.1.0 - Guest Analytics Platform</span>
+              <div class="terminal-indicators">
+                <div class="indicator active"></div>
+                <div class="indicator active"></div>
+                <div class="indicator"></div>
+              </div>
+            </div>
+            <div class="terminal-content" id="app-output">
+              Experience app framework ready. Click LAUNCH APP SIMULATION to see AI-enhanced guest tracking in action.
             </div>
           </div>
         </div>
@@ -2502,6 +2973,102 @@
 
       function viewGitHubRepo() {
         window.open('https://github.com/HannnibalKing/Haunted-House-Robotics-DMX/tree/main/combat_escape_room', '_blank');
+      }
+
+      // Scare Experience App Demo Functions
+      let appDemoActive = false;
+
+      function runAppDemo() {
+        if (appDemoActive) return;
+        
+        appDemoActive = true;
+        const output = document.getElementById('app-output');
+        
+        output.innerHTML = '<div class="log-entry log-info">🚀 Initializing Scare Experience App simulation...</div>';
+        
+        const appDemoSequence = [
+          { time: 1000, msg: '📱 React Native app connecting to backend...', type: 'info' },
+          { time: 2000, msg: '🔌 WebSocket connection established', type: 'success' },
+          { time: 3000, msg: '📡 MQTT broker online - subscribing to sensor feeds', type: 'success' },
+          { time: 4000, msg: '👥 Guest detected: Group of 4 entering attraction', type: 'warning', highlight: true },
+          { time: 5200, msg: '🧠 AI Analytics: Analyzing group behavior patterns...', type: 'info' },
+          { time: 6500, msg: '📊 Biometrics: Avg heart rate 82 BPM | Stress level: LOW', type: 'info' },
+          { time: 7800, msg: '🎯 Adaptive Engine: Increasing scare intensity by 15%', type: 'warning' },
+          { time: 9000, msg: '📍 Location: Room 1 | Proximity sensors triggered', type: 'info' },
+          { time: 10200, msg: '🤖 ML Prediction: Optimal scare trigger in 3.2 seconds', type: 'warning' },
+          { time: 11500, msg: '⚡ Coordinating: Skeleton + lighting + audio effects', type: 'success' },
+          { time: 12800, msg: '📈 Performance: Response time 47ms | Success rate 94%', type: 'success' },
+          { time: 14000, msg: '👥 Group Analytics: Leader identified - targeting secondary scares', type: 'info' },
+          { time: 15500, msg: '🔄 Real-time adjustment: Reducing intensity for younger guests', type: 'warning' },
+          { time: 17000, msg: '📊 Session metrics: Engagement +23% | Safety incidents: 0', type: 'success' },
+          { time: 18200, msg: '🎯 Experience complete - Guest satisfaction: 4.8/5 stars', type: 'success', highlight: true }
+        ];
+        
+        let currentStep = 0;
+        const interval = setInterval(() => {
+          if (currentStep >= appDemoSequence.length) {
+            clearInterval(interval);
+            setTimeout(() => {
+              output.innerHTML += '<div class="log-entry log-success">🏆 AI-Enhanced Experience Demo Complete!</div>';
+              output.innerHTML += '<div class="log-entry log-info">💡 Ready for next guest group simulation...</div>';
+              appDemoActive = false;
+            }, 1000);
+            return;
+          }
+          
+          const step = appDemoSequence[currentStep];
+          const logClass = step.highlight ? `log-${step.type} highlight` : `log-${step.type}`;
+          output.innerHTML += `<div class="log-entry ${logClass}">${step.msg}</div>`;
+          
+          // Auto-scroll to bottom
+          output.scrollTop = output.scrollHeight;
+          
+          currentStep++;
+        }, 1000);
+      }
+
+      function viewAppRepo() {
+        window.open('https://github.com/HannnibalKing/Haunted-House-Robotics-DMX/tree/main/03_scare_experience_app', '_blank');
+      }
+
+      function downloadAppFramework() {
+        const output = document.getElementById('app-output');
+        
+        output.innerHTML += '<div class="log-entry log-info">📦 Preparing Scare Experience App framework download...</div>';
+        
+        setTimeout(() => {
+          output.innerHTML += '<div class="log-entry log-success">✅ Framework includes:</div>';
+          output.innerHTML += '<div class="log-entry log-info">   • React Native mobile app with AI integration</div>';
+          output.innerHTML += '<div class="log-entry log-info">   • Node.js backend with ML analytics engine</div>';
+          output.innerHTML += '<div class="log-entry log-info">   • MongoDB data models for guest behavior</div>';
+          output.innerHTML += '<div class="log-entry log-info">   • Real-time WebSocket & MQTT communication</div>';
+          output.innerHTML += '<div class="log-entry log-info">   • Complete deployment documentation</div>';
+        }, 500);
+        
+        // Download multiple files
+        setTimeout(() => {
+          // App package files
+          const files = [
+            'https://raw.githubusercontent.com/HannnibalKing/Haunted-House-Robotics-DMX/main/03_scare_experience_app/app/package.json',
+            'https://raw.githubusercontent.com/HannnibalKing/Haunted-House-Robotics-DMX/main/03_scare_experience_app/README.md'
+          ];
+          
+          files.forEach((url, index) => {
+            setTimeout(() => {
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = url.split('/').pop();
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+            }, index * 200);
+          });
+          
+          setTimeout(() => {
+            output.innerHTML += '<div class="log-entry log-success">🎯 Scare Experience App framework downloaded!</div>';
+            output.innerHTML += '<div class="log-entry log-info">📋 Next: Run "npm install" and follow setup instructions</div>';
+          }, 1000);
+        }, 1500);
       }
     </script>
   </body>
