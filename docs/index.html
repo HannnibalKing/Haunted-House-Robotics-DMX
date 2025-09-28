@@ -195,13 +195,106 @@
         border-bottom: 1px dotted rgba(255, 255, 255, 0.4);
       }
 
-      @media (max-width: 640px) {
-        .cta {
-          flex-direction: column;
-        }
-        section {
-          padding: 22px;
-        }
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-top: 24px;
+      }
+
+      .demo-panel {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 20px;
+      }
+
+      .demo-panel h3 {
+        margin: 0 0 16px 0;
+        font-size: 1.3rem;
+        color: var(--accent);
+      }
+
+      .controls {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .run-btn, .stop-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+      }
+
+      .run-btn {
+        background: linear-gradient(135deg, #00ff88, #00cc66);
+        color: #0a0a0a;
+      }
+
+      .run-btn:hover {
+        background: linear-gradient(135deg, #00cc66, #009944);
+        transform: translateY(-1px);
+      }
+
+      .stop-btn {
+        background: linear-gradient(135deg, var(--accent), #cc4444);
+        color: white;
+      }
+
+      .stop-btn:hover {
+        background: linear-gradient(135deg, #cc4444, #aa3333);
+        transform: translateY(-1px);
+      }
+
+      .terminal {
+        background: #0a0a0a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        font-family: "Fira Code", "Cascadia Code", monospace;
+        font-size: 0.85rem;
+        height: 200px;
+        overflow-y: auto;
+      }
+
+      .terminal-header {
+        background: #1a1a1a;
+        color: #00ff88;
+        padding: 8px 12px;
+        border-bottom: 1px solid #333;
+        font-weight: 600;
+      }
+
+      .terminal-content {
+        padding: 12px;
+        color: #e0e0e0;
+        white-space: pre-wrap;
+        font-family: inherit;
+      }
+
+      .log-entry {
+        margin-bottom: 4px;
+      }
+
+      .log-timestamp {
+        color: #666;
+      }
+
+      .log-command {
+        color: #00ff88;
+        font-weight: 600;
+      }
+
+      .log-warning {
+        color: #ffaa00;
+      }
+
+      .log-error {
+        color: #ff4444;
       }
     </style>
   </head>
@@ -275,16 +368,59 @@
       </section>
 
       <section id="terminal">
-        <span class="badge">Live Coding Demo</span>
-        <h2>Simulate the Haunt from the Terminal</h2>
-        <p>
-          The <code class="inline">console_demo.py</code> script replays the same cue codes used in the field. Perfect for interviews or quick GitHub previews.
-        </p>
-        <pre><code>cd simulations
-python console_demo.py skeleton --instant
-python console_demo.py ghost --speed 1.5
-python console_demo.py app --loop 2</code></pre>
-        <p>Each line logs timestamps, cues (e.g., <code class="inline">M29</code> head snap), and scene highlights so viewers can follow the choreography in real time.</p>
+        <span class="badge">Live Interactive Demos</span>
+        <h2>Control Each System</h2>
+        <p>Click the controls below to run each robotics system. Watch the terminal output show real-time cues and command sequences.</p>
+        
+        <div class="demo-grid">
+          <div class="demo-panel">
+            <h3>🦴 Animated Skeleton</h3>
+            <div class="controls">
+              <button class="run-btn" onclick="runDemo('skeleton')">▶️ Start Show</button>
+              <button class="stop-btn" onclick="stopDemo('skeleton')">⏹️ Emergency Stop</button>
+            </div>
+            <div class="terminal" id="skeleton-terminal">
+              <div class="terminal-header">SKELETON_CONTROLLER v2.1</div>
+              <div class="terminal-content" id="skeleton-output">Ready. Press START to begin servo choreography...</div>
+            </div>
+          </div>
+
+          <div class="demo-panel">
+            <h3>👻 Motion Ghost</h3>
+            <div class="controls">
+              <button class="run-btn" onclick="runDemo('ghost')">▶️ Launch Scare</button>
+              <button class="stop-btn" onclick="stopDemo('ghost')">⏹️ Emergency Stop</button>
+            </div>
+            <div class="terminal" id="ghost-terminal">
+              <div class="terminal-header">GHOST_MOTION v1.8</div>
+              <div class="terminal-content" id="ghost-output">Carriage at HOME position. Sensors armed...</div>
+            </div>
+          </div>
+
+          <div class="demo-panel">
+            <h3>🌫️ Fog & Lighting</h3>
+            <div class="controls">
+              <button class="run-btn" onclick="runDemo('effects')">▶️ Fire Effects</button>
+              <button class="stop-btn" onclick="stopDemo('effects')">⏹️ Emergency Stop</button>
+            </div>
+            <div class="terminal" id="effects-terminal">
+              <div class="terminal-header">DMX_MASTER v3.2</div>
+              <div class="terminal-content" id="effects-output">DMX channels 1-512 online. Fog machine primed...</div>
+            </div>
+          </div>
+
+          <div class="demo-panel">
+            <h3>🔥 Combat Escape Room</h3>
+            <div class="controls">
+              <button class="run-btn" onclick="runDemo('combat')">▶️ Begin Mission</button>
+              <button class="stop-btn" onclick="stopDemo('combat')">⏹️ Abort Mission</button>
+            </div>
+            <div class="terminal" id="combat-terminal">
+              <div class="terminal-header">TACTICAL_SIM v4.0 [CLASSIFIED]</div>
+              <div class="terminal-content" id="combat-output">Insurgent camp simulation loaded. 4 rooms active. Awaiting infiltration...</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section>
@@ -305,5 +441,110 @@ python console_demo.py app --loop 2</code></pre>
         Need the full repo? <a href="https://github.com/HannnibalKing/Haunted-House-Robotics-DMX" target="_blank" rel="noopener">Fork it on GitHub</a>.
       </p>
     </footer>
+    <script>
+      const demoScenarios = {
+        skeleton: [
+          { time: 0, cmd: 'INIT', msg: 'Power on animatronic skeleton core' },
+          { time: 100, cmd: 'M05', msg: 'Set head servo to neutral' },
+          { time: 300, cmd: 'L12', msg: 'Fade DMX wash to ember red' },
+          { time: 800, cmd: 'S11', msg: 'Idle loop: finger twitch' },
+          { time: 1300, cmd: 'PIR', msg: 'Motion trip detected - VISITOR ENTERS', highlight: true },
+          { time: 1500, cmd: 'M29', msg: 'Snap head to visitor' },
+          { time: 1700, cmd: 'M33', msg: 'Raise both arms' },
+          { time: 2200, cmd: 'AUX', msg: 'Trigger jaw chatter synced to audio' },
+          { time: 2700, cmd: 'DMX', msg: 'Flash strobes + cold white backlight' },
+          { time: 3200, cmd: 'WAIT', msg: 'Hold pose' },
+          { time: 3700, cmd: 'RESET', msg: 'Arms down, lights to idle' }
+        ],
+        ghost: [
+          { time: 0, cmd: 'INIT', msg: 'Pre-charge carriage and test limit switches' },
+          { time: 200, cmd: 'L21', msg: 'Set LED strip to cyan breathing' },
+          { time: 400, cmd: 'PIR', msg: 'Motion detect at hallway - GUEST APPROACH', highlight: true },
+          { time: 600, cmd: 'M14', msg: 'Carriage glide forward 1.2m' },
+          { time: 1200, cmd: 'FX1', msg: 'Fog blast + shriek sample' },
+          { time: 1600, cmd: 'L99', msg: 'Strobe white / amber alternation' },
+          { time: 2100, cmd: 'WAIT', msg: 'Hover at guest' },
+          { time: 2600, cmd: 'M02', msg: 'Retreat carriage to home' },
+          { time: 3200, cmd: 'RESET', msg: 'Resume cyan breathing + cooldown' }
+        ],
+        effects: [
+          { time: 0, cmd: 'INIT', msg: 'DMX universe online - 512 channels active' },
+          { time: 200, cmd: 'FOG1', msg: 'Fog machine 1 heating (30s warm-up)' },
+          { time: 400, cmd: 'FOG2', msg: 'Fog machine 2 heating (30s warm-up)' },
+          { time: 800, cmd: 'L001', msg: 'Par lights 1-4 fade to deep red' },
+          { time: 1200, cmd: 'TRIG', msg: 'Pressure plate activated - GUEST DETECTED', highlight: true },
+          { time: 1400, cmd: 'FIRE', msg: 'Fog blast + flame projector ignition' },
+          { time: 1600, cmd: 'L255', msg: 'Strobe array full intensity' },
+          { time: 2000, cmd: 'SND1', msg: 'Thunder crack + explosion sample' },
+          { time: 2400, cmd: 'FADE', msg: 'All effects fade to ambient' }
+        ],
+        combat: [
+          { time: 0, cmd: 'BOOT', msg: '[CLASSIFIED] Tactical simulation initializing...' },
+          { time: 500, cmd: 'SITR', msg: 'SITUATION: Insurgent compound, 4 rooms, 6 hostiles' },
+          { time: 1000, cmd: 'R001', msg: 'ENTRY POINT: Breached wall, smoke grenades deployed' },
+          { time: 1500, cmd: 'CONT', msg: 'Contact front! AK-47 muzzle flash detected', highlight: true },
+          { time: 2000, cmd: 'MORTAR', msg: 'Incoming 82mm mortar - TAKE COVER!' },
+          { time: 2200, cmd: 'EXPL', msg: 'Explosion 15m northeast - debris shower active' },
+          { time: 2800, cmd: 'R002', msg: 'Room 2 cleared - IED discovered under stairwell' },
+          { time: 3400, cmd: 'SNIPER', msg: 'Sniper fire from compound roof - suppressing' },
+          { time: 4000, cmd: 'R003', msg: 'Interrogation room - intel documents secured' },
+          { time: 4600, cmd: 'EVAC', msg: 'Extraction point reached - mission complete' }
+        ]
+      };
+
+      let activeDemo = null;
+      let demoTimeout = null;
+
+      function runDemo(type) {
+        if (activeDemo) stopDemo(activeDemo);
+        activeDemo = type;
+        
+        const output = document.getElementById(type + '-output');
+        output.innerHTML = '';
+        
+        const scenario = demoScenarios[type];
+        let stepIndex = 0;
+        
+        function runNextStep() {
+          if (stepIndex >= scenario.length || activeDemo !== type) return;
+          
+          const step = scenario[stepIndex];
+          const timestamp = (step.time / 1000).toFixed(2).padStart(6, ' ');
+          const highlight = step.highlight ? ' log-warning' : '';
+          
+          output.innerHTML += `<div class="log-entry${highlight}">
+            <span class="log-timestamp">[${timestamp}s]</span> 
+            <span class="log-command">${step.cmd.padEnd(8)}</span> 
+            ${step.msg}
+          </div>`;
+          
+          output.scrollTop = output.scrollHeight;
+          stepIndex++;
+          
+          if (stepIndex < scenario.length) {
+            const nextDelay = scenario[stepIndex].time - step.time;
+            demoTimeout = setTimeout(runNextStep, nextDelay);
+          } else {
+            setTimeout(() => {
+              if (activeDemo === type) {
+                output.innerHTML += '<div class="log-entry log-command">Sequence complete. Ready for next run...</div>';
+                activeDemo = null;
+              }
+            }, 500);
+          }
+        }
+        
+        runNextStep();
+      }
+
+      function stopDemo(type) {
+        if (activeDemo === type) {
+          activeDemo = null;
+          clearTimeout(demoTimeout);
+          const output = document.getElementById(type + '-output');
+          output.innerHTML += '<div class="log-entry log-error">EMERGENCY STOP - All systems halted</div>';
+        }
+      }
+    </script>
   </body>
 </html>
