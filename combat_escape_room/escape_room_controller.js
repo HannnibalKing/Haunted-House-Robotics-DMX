@@ -12,10 +12,21 @@ const fs = require('fs');
 const path = require('path');
 
 class CombatEscapeRoomController {
-    constructor() {
+    constructor(options = {}) {
+        const defaults = {
+            enableServer: true,
+            enableWebSocket: true,
+            enableMQTT: true,
+            mqttClient: null,
+            port: undefined,
+            wsPort: undefined
+        };
+
+        this.options = { ...defaults, ...options };
+
         this.app = express();
-        this.port = process.env.PORT || 3000;
-        this.wsPort = process.env.WS_PORT || 8080;
+        this.port = this.options.port ?? process.env.PORT ?? 3000;
+        this.wsPort = this.options.wsPort ?? process.env.WS_PORT ?? 8080;
         
         // Mission state
         this.missionState = {
@@ -88,9 +99,24 @@ class CombatEscapeRoomController {
             }
         ];
 
-        this.initializeServer();
-        this.initializeWebSocket();
-        this.initializeMQTT();
+        this.wss = { clients: new Set() };
+        this.mqttClient = this.options.mqttClient || {
+            publish: () => {},
+            subscribe: () => {},
+            on: () => {}
+        };
+
+        if (this.options.enableServer) {
+            this.initializeServer();
+        }
+
+        if (this.options.enableWebSocket) {
+            this.initializeWebSocket();
+        }
+
+        if (this.options.enableMQTT) {
+            this.initializeMQTT();
+        }
     }
 
     initializeServer() {
@@ -128,7 +154,7 @@ class CombatEscapeRoomController {
     }
 
     initializeWebSocket() {
-        this.wss = new WebSocket.Server({ port: this.wsPort });
+    this.wss = new WebSocket.Server({ port: this.wsPort });
         
         this.wss.on('connection', (ws) => {
             console.log('Client connected to mission control');
@@ -430,7 +456,10 @@ class CombatEscapeRoomController {
     }
 }
 
-// Initialize and start the controller
-const controller = new CombatEscapeRoomController();
+// Initialize and start the controller when run directly
+if (require.main === module) {
+    // eslint-disable-next-line no-new
+    new CombatEscapeRoomController();
+}
 
 module.exports = CombatEscapeRoomController;

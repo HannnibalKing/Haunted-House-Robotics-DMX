@@ -51,6 +51,18 @@ nano .env
 npm start
 ```
 
+### Docker & Local Integration Tests
+
+```bash
+# Build and boot the controller alongside a Mosquitto broker
+docker compose up --build
+
+# Tail logs in another terminal
+docker compose logs -f controller
+```
+
+The container exposes the API on `http://localhost:3000` and the WebSocket bridge on `ws://localhost:8080`. Update `.env` as needed for physical hardware.
+
 ### Environment Variables
 
 ```env
@@ -149,6 +161,7 @@ npm run dev  # Uses nodemon for auto-restart
 ### Testing
 ```bash
 npm test     # Run Jest test suite
+npm run lint # Static analysis via ESLint
 ```
 
 ### Adding New Rooms

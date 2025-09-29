@@ -60,6 +60,16 @@ code/
 4. Connect the Arduino Nano via USB, choose the correct board & port, then upload.
 5. Use the serial monitor at 115200 baud to verify limit switch events before activating the fog machine.
 
+### PlatformIO + Bench Diagnostics
+
+```bash
+pio run -e ghost_main            # Compile production firmware
+pio run -e ghost_bench -t upload # Flash carriage + LED diagnostics
+pio device monitor -b 115200     # Watch glide + strobe telemetry
+```
+
+The bench program glides the carriage forward/back and strobes the LED strip so you can validate power and wiring before venue deployment.
+
 ### Libraries Used
 - `AccelStepper` for smooth stepper movement
 - `Adafruit_NeoPixel` for WS2812 control

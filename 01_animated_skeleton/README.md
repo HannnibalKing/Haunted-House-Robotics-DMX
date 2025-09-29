@@ -96,6 +96,18 @@ Upload the provided Arduino sketch and configure DMX addresses.
 4. Select *Tools → Board → Arduino Uno* (or your compatible board) and the matching COM port.
 5. Click **Upload** and monitor the serial console at 115200 baud for sensor debug logs.
 
+### PlatformIO + Bench Diagnostics
+
+Prefer reproducible builds? Use the new PlatformIO environments:
+
+```bash
+pio run -e skeleton_main       # Compile production firmware
+pio run -e skeleton_bench -t upload  # Flash servo sweep diagnostic
+pio device monitor -b 115200   # Observe servo health output
+```
+
+The bench firmware steps each servo through its safe travel, logging any chatter or binding before a show run.
+
 ## 🎭 Animation Sequences
 
 ### 1. Idle Mode

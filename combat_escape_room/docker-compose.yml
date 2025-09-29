@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  controller:
+    build: .
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    environment:
+      - MQTT_BROKER=mqtt://broker:1883
+    depends_on:
+      broker:
+        condition: service_healthy
+  broker:
+    image: eclipse-mosquitto:2
+    ports:
+      - "1883:1883"
+    healthcheck:
+      test: ["CMD", "mosquitto_sub", "-h", "localhost", "-t", "$SYS/#", "-C", "1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5

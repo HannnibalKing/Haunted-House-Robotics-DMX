@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2017",
-    "module": "commonjs",
-    "jsx": "react",
+    "target": "es2020",
+  "module": "Node16",
+    "moduleResolution": "node16",
+    "jsx": "react-native",
     "strict": true,
+    "noEmit": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["jest", "react"]
+    "lib": ["esnext", "dom", "dom.iterable"],
+  "types": ["jest", "react"]
   },
   "include": ["src/**/*", "App.tsx", "__tests__/**/*"]
 }

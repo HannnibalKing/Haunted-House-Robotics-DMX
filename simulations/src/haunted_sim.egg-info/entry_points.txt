@@ -1,0 +1,2 @@
+[console_scripts]
+haunt-sim = haunted_sim.cli:main

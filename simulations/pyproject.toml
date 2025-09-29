@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "haunted-sim"
+version = "0.1.0"
+description = "Terminal demos for Haunted House Robotics DMX sequences"
+authors = [{ name = "Jose 'Hannibal' Herrera" }]
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "License :: OSI Approved :: MIT License"
+]
+dependencies = []
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7.4",
+  "pytest-cov>=4.1"
+]
+
+[project.scripts]
+haunt-sim = "haunted_sim.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

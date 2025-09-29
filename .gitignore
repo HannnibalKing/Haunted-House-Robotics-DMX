@@ -8,6 +8,11 @@ yarn-error.log*
 .expo/
 dist/
 web-build/
+docs/dist/
+docs/node_modules/
+simulations/.venv/
+simulations/*.egg-info/
+simulations/dist/
 
 # Native
 *.orig.*

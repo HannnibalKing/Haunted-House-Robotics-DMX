@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  expo-app:
+    name: Expo App (lint & test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 03_scare_experience_app/app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: |
+            03_scare_experience_app/app/package-lock.json
+      - name: Install dependencies
+        run: npm install
+      - name: Type check (lint)
+        run: npm run lint
+      - name: Run tests
+        run: npm test -- --runInBand --watch=false
+
+  combat-controller:
+    name: Combat Controller (lint & test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: combat_escape_room
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: combat_escape_room/package-lock.json
+      - name: Install dependencies
+        run: npm install
+      - name: ESLint
+        run: npm run lint
+      - name: Jest
+        run: npm test -- --runInBand
+
+  docs-site:
+    name: Docs Audit (Lighthouse + HTML)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: docs/package-lock.json
+      - name: Install dependencies
+        run: npm install
+      - name: Audit site
+        run: npm run audit
+
+  python-simulations:
+    name: Simulations Package (pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: simulations
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: simulations/pyproject.toml
+      - name: Install package
+        run: pip install .[test]
+      - name: Run tests
+        run: pytest --maxfail=1 --disable-warnings -q
